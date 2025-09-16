@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Circuitos - Neon Rush</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="vehiculos.html">Vehículos</a>
+      <a href="circuitos.html" class="active">Circuitos</a>
+    </nav>
+  </header>
+
+  <!-- ===== CONTENIDO ===== -->
+  <main class="site">
+    <h1>Circuitos</h1>
+
+   <div class="circuitos-container">
+  <div class="circuito-card">
+    <img src="./img/Neon City.png" alt="Circuito Neon City">
+    <h2>Neon City</h2>
+    <p>Circuito veloz con curvas cerradas y saltos. Requiere buena aceleración.</p>
+    <span class="difficulty">Media</span>
+    <button class="btn-select" onclick="alert('Neon-City Seleccionado')">Seleccionar</button>
+  </div>
+
+  <div class="circuito-card">
+    <img src="./img/Void Loop.png" alt="Circuito Void Loop">
+    <h2>Void Loop</h2>
+    <p>Pistas largas y rectas. Máxima velocidad, poca maniobrabilidad requerida.</p>
+    <span class="difficulty">Alta</span>
+    <button class="btn-select" onclick="alert('Void-Loop Seleccionado')">Seleccionar</button>
+  </div>
+
+  <div class="circuito-card">
+    <img src="./img/Cyber Canyon.png" alt="Circuito Cyber Canyon">
+    <h2>Cyber Canyon</h2>
+    <p>Un recorrido montañoso con túneles iluminados y saltos extremos.</p>
+    <span class="difficulty">Difícil</span>
+    <button class="btn-select" onclick="alert('Cyber-Canyon Seleccionado')">Seleccionar</button>
+  </div>
+
+  <div class="circuito-card">
+    <img src="./img/Plasma Dunes.png" alt="Circuito Plasma Dunes">
+    <h2>Plasma Dunes</h2>
+    <p>Terreno arenoso con giros amplios, ideal para coches de gran manejo.</p>
+    <span class="difficulty">Baja</span>
+    <button class="btn-select" onclick="alert('Plasma-Dunes Seleccionado')">Seleccionar</button>
+  </div>
+
+  <div class="circuito-card">
+    <img src="./img/Quantum Drift.png" alt="Circuito Quantum Drift">
+    <h2>Quantum Drift</h2>
+    <p>Pistas flotantes en gravedad cero, requiere precisión en los giros.</p>
+    <span class="difficulty">Alta</span>
+    <button class="btn-select" onclick="alert('Quantum-Drift Seleccionado')">Seleccionar</button>
+  </div>
+
+  <div class="circuito-card">
+    <img src="./img/Nova Horizon.png" alt="Circuito Nova Horizon">
+    <h2>Nova Horizon</h2>
+    <p>Circuito en desierto cósmico con tormentas de plasma intermitentes.</p>
+    <span class="difficulty">Media</span>
+    <button class="btn-select" onclick="alert('Nova-Horizon Seleccionado')">Seleccionar</button>
+  </div>
+</div>
+
+
+    <!-- ===== BOTONES ===== -->
+    <div class="acciones">
+      <a href="vehiculos.html" class="btn atras">⬅ Atrás</a>
+      <a href="carrera.html" class="btn iniciar">▶ Jugar Ahora</a>
+    </div>
+  </main>
+</body>
+
+<style>
+/* ================================
+   Circuitos - Estilo Futurista Morado Animado
+================================ */
+body {
+  font-family: 'Orbitron', sans-serif;
+  background: radial-gradient(circle at top, #0d0d0d, #1b0034);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  animation: fadeIn 1s ease-in;
+}
+
+/* ===== Header y navegación ===== */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(10, 0, 25, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 15px 0;
+  box-shadow: 0 0 15px rgba(255,0,255,0.4);
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+nav a {
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+  color: #f0f;
+  text-shadow: 0 0 10px #f0f, 0 0 20px #f0f;
+}
+
+nav a.active {
+  color: #f0f;
+  font-weight: bold;
+  text-shadow: 0 0 12px #f0f, 0 0 20px #f0f;
+}
+
+/* Espaciado por header fijo */
+.site {
+  padding-top: 120px;
+  max-width: 1200px;
+  margin: auto;
+  animation: slideUp 1s ease-out;
+}
+
+/* ===== Título ===== */
+h1 {
+  text-align: center;
+  font-size: 3rem;
+  color: #f0f;
+  text-shadow: 0 0 15px #f0f, 0 0 30px #f0f;
+  margin: 20px 0 40px;
+  animation: glowText 2s infinite alternate;
+}
+
+/* ===== Grid de circuitos ===== */
+.circuitos-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas fijas */
+  gap: 25px;
+  padding: 20px;
+}
+
+/* ===== Tarjeta de circuito ===== */
+.circuito-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInCard 1.2s ease forwards;
+}
+
+.circuito-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(255, 0, 255, 0.8);
+}
+
+/* Imagen */
+.circuito-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  animation: pulse 3s infinite;
+}
+
+/* Nombre del circuito */
+.circuito-card h2 {
+  font-size: 1.5rem;
+  color: #f0f;
+  text-shadow: 0 0 10px #f0f, 0 0 20px #f0f;
+  margin-bottom: 10px;
+}
+
+/* Descripción */
+.circuito-card p {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 12px;
+}
+
+/* Dificultad */
+.circuito-card .difficulty {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(255, 0, 255, 0.2);
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #f0f;
+}
+
+/* Botón seleccionar en tarjeta */
+.btn-select {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 25px;
+  background: #f0f;
+  color: #000;
+  cursor: pointer;
+  box-shadow: 0 0 10px #f0f, 0 0 20px #f0f;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-select:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #f0f, 0 0 50px #f0f;
+}
+
+
+/* ===== Botones de acción ===== */
+.acciones {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 50px 0;
+}
+
+.btn {
+  padding: 14px 30px;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  font-family: 'Orbitron', sans-serif;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn.atras {
+  background: rgba(255, 0, 255, 0.2);
+  color: #fff;
+  box-shadow: 0 0 10px #f0f;
+}
+
+.btn.atras:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #f0f;
+}
+
+.btn.iniciar {
+  background: #f0f;
+  color: #000;
+  font-weight: bold;
+  box-shadow: 0 0 20px #f0f, 0 0 40px #f0f;
+}
+
+.btn.iniciar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 40px #f0f, 0 0 80px #f0f;
+}
+
+/* ================================
+   Animaciones Keyframes
+================================ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes glowText {
+  from { text-shadow: 0 0 10px #f0f; }
+  to { text-shadow: 0 0 20px #f0f, 0 0 40px #f0f; }
+}
+
+@keyframes fadeInCard {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px #f0f); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 0 15px #f0f); }
+}
+
+
+/* ================================
+   Responsividad Circuitos
+================================ */
+
+/* Desktop: 3 columnas ya definido */
+
+/* Tablets (ancho <= 1024px) */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  .circuitos-container {
+    grid-template-columns: repeat(3, 1fr); /* 2 columnas */
+    gap: 20px;
+    padding: 15px;
+  }
+  .circuito-card img {
+    max-width: 100%;
+  }
+  .circuito-card h2 {
+    font-size: 1.3rem;
+  }
+  .circuito-card p {
+    font-size: 0.9rem;
+  }
+  .circuito-card .difficulty {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+  .acciones {
+    flex-direction: row;
+    gap: 15px;
+  }
+  .btn {
+    max-width: 200px;
+    margin: 30px auto 0;
+  }
+}
+
+/* Móviles (ancho <= 768px) */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  .circuitos-container {
+   grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 10px;
+  }
+  .circuito-card img {
+    max-width: 50%;
+    margin: 0 auto 10px;
+  }
+  .circuito-card h2 {
+    font-size: 1.1rem;
+  }
+  .circuito-card p {
+    font-size: 0.8rem;
+  }
+  .circuito-card .difficulty {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+  .acciones {
+    gap: 10px;
+  }
+  .btn {
+    max-width: 200px;
+    margin: 20px auto 0;
+  }
+}
+
+/* Forzar modo horizontal */
+@media (orientation: portrait) {
+  body::before {
+    content: "⚠️ Por favor gira tu dispositivo para vista horizontal";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0d0d0d;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2rem;
+    z-index: 9999;
+  }
+  main.site,
+  header {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .btn {
+    font-size: 1rem;
+    padding: 12px 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .btn {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+  }
+}
+</style>
+
+</html>

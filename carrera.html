@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partida</title>
+  <style>
+    .video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    #trailer-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .btn-inicio {
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid white;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-inicio:hover {
+      background: white;
+      color: black;
+      box-shadow: 0 0 20px white;
+    }
+
+    /* ===== Responsividad ===== */
+@media (max-width: 1024px) {
+  .btn-inicio {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .btn-inicio {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+}
+
+.video{
+  overflow-y: hidden;
+}
+
+/* ===== Forzar modo horizontal ===== */
+@media (orientation: portrait) {
+  body::before {
+    content: "⚠️ Por favor gira tu dispositivo para vista horizontal";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    color: #0ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2rem;
+    z-index: 9;
+   
+  }
+
+  .btn-inicio,
+  .video {
+    display: none;
+  }
+  .video{
+  overflow-y: hidden;
+}
+
+}
+  </style>
+</head>
+<body>
+  <div class="video">
+    <video id="trailer-video" autoplay muted loop playsinline>
+      <source src="./vid/video.mp4" type="video/mp4">
+      Tu navegador no soporta el formato de video.
+    </video>
+  </div>
+  <a href="index.html" class="btn-inicio">Inicio</a>
+</body>
+
+</html>
+

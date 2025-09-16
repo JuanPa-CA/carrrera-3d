@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Simulador de Carreras Futuristas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="carrera.css">
+</head>
+<body>
+  <!-- ===== HEADER FIJO ===== -->
+  <header>
+    <nav>
+      <a href="index.html" class="active">Inicio</a>
+      <a href="vehiculos.html">Vehículos</a>
+      <a href="circuitos.html">Circuitos</a>
+    </nav>
+  </header>
+
+  <!-- ===== CONTENIDO ===== -->
+  <main class="site">
+    <h1>NEON RUSH</h1>
+    <p>Carreras de alta velocidad en paisajes futuristas. Personaliza tu nave y compite en circuitos extremos.</p>
+    
+  <button class="btn play" onclick="window.location.href='vehiculos.html'">▶ Jugar Ahora</button>
+
+
+    <div class="video-card">
+     
+        <video id="trailer-video" autoplay muted loop>
+                <source src="./vid/video.mp4" type="video/mp4">
+            </video>
+    </div>
+
+    <footer>
+  <p>© 2025 Neon Rush | Todos los derechos reservados</p>
+  <div class="social-icons">
+    <a href="https://discord.com" target="_blank" class="icon discord" aria-label="Discord">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtAEfSw-2sMgXfXJxVQ0AATc2QJ6TBd1nRnA&s" alt="Discord">
+    </a>
+    <a href="https://twitter.com" target="_blank" class="icon x" aria-label="X">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfxRWfQXLI0gkv7sdl2y5vRwPUIvlZOAgCcA&s" alt="X">
+    </a>
+    <a href="https://reddit.com" target="_blank" class="icon reddit" aria-label="Reddit">
+      <img src="./img/reddit.png" alt="Reddit">
+    </a>
+  </div>
+</footer>
+
+  </main>
+</body>
+<style>
+:root {
+  --primary: #0ff;
+  --secondary: #f0f;
+  --accent: #ff0077;
+  --bg-dark: #0a0a0f;
+  --muted: #888;
+  --white: #fff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top left, #0a0a0f, #1b0034, #000);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+
+}
+
+/* ================================
+   Header y navegación
+================================ */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(10, 10, 15, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 16px 0;
+  box-shadow: 0 0 15px rgba(0,255,255,0.3);
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  height: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: color 0.3s, text-shadow 0.3s;
+  padding-top: 10px;
+}
+
+nav a:hover {
+  color: var(--primary);
+  text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+}
+
+nav a.active {
+  color: var(--primary);
+  font-weight: bold;
+  text-shadow: 0 0 12px var(--primary), 0 0 20px var(--primary);
+}
+
+/* ================================
+   Main
+================================ */
+main.site {
+  text-align: center;
+  max-width: 900px;
+  padding: 120px 20px 40px; /* margen superior para no chocar con header */
+  margin: auto;
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 7rem;
+  margin: 10px 0 10px;
+  color: var(--primary);
+  text-shadow: 0 0 10px var(--primary), 0 0 25px var(--secondary);
+  animation: glow 2s infinite alternate;
+}
+
+p {
+  font-size: 1.2rem;
+  color: var(--muted --bg-dark);
+  max-width: 700px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+/* ================================
+   Botones
+================================ */
+.btn {
+  margin: 15px 10px;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 30px;
+  font-family: 'Orbitron', sans-serif;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn.play {
+  background: var(--primary);
+  color: #000;
+  box-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
+}
+
+.btn.play:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px var(--primary), 0 0 50px var(--primary);
+}
+
+/* ================================
+   Video Card
+================================ */
+.video-card {
+  margin-top: -300px;
+  height: 320px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  overflow: hidden; 
+  border: 2px dashed rgba(255,255,255,0.2);
+  animation: pulse 3s infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -2;
+}
+
+.video-card video {
+  width: 1000px;
+  height: 320px;
+  object-fit: fill;
+  border-radius: 12px;
+  z-index: -2;
+}
+
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(8px);
+  color: var(--primary);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -2px 15px rgba(0, 255, 255, 0.3);
+  z-index: 1000;
+}
+
+/* Texto del footer */
+footer p {
+  margin: 0;
+}
+
+/* Contenedor de logos */
+footer .social-icons {
+  display: flex;
+  gap: 20px;
+}
+
+/* Logos */
+footer .social-icons .icon img {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.3s, filter 0.3s;
+  filter: drop-shadow(0 0 3px var(--primary));
+}
+
+footer .social-icons .icon img:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 10px var(--primary));
+}
+/* ================================
+   Animaciones
+================================ */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px var(--primary), 0 0 20px var(--secondary);
+  }
+  to {
+    text-shadow: 0 0 20px var(--secondary), 0 0 40px var(--accent);
+  }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+  50% { box-shadow: 0 0 30px rgba(0,255,255,0.4); }
+  100% { box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+}
+
+/* ================================
+   RESPONSIVIDAD
+================================ */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 5rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  .video-card {
+    height: 250px;
+  }
+  .video-card video {
+    width: 100%;
+    height: 250px;
+  }
+  nav {
+    gap: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  h1 {
+    font-size: 4rem;
+  }
+  p {
+    font-size: 0.9rem;
+  }
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  .video-card {
+    height: 200px;
+  }
+  .video-card video {
+    height: 200px;
+  }
+  nav {
+    gap: 30px;
+  }
+
+  footer{
+   display: none;
+  }
+}
+
+/* Forzar modo horizontal */
+@media (orientation: portrait) {
+  body::before {
+    content: "⚠️ Por favor gira tu dispositivo para vista horizontal";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-dark);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5rem;
+    z-index: 9999;
+  }
+  main.site,
+  header {
+    display: none;
+  }
+}
+
+/* ================================
+   RESPONSIVIDAD
+================================ */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 5rem;
+  }
+  p {
+    font-size: 1rem;
+    max-width: 600px; /* Adjusting the max-width for better readability */
+  }
+  .video-card {
+    height: 250px;
+    margin-top: -240px; /* Reduce negative margin for smaller screens */
+  }
+  .video-card video {
+    width: 100%;
+    height: 250px;
+  }
+  nav {
+    gap: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  h1 {
+    font-size: 3rem; /* Further reduce font size for better fit */
+    margin: 0 0 5px; /* Adjust margin for less spacing */
+  }
+  p {
+    font-size: 0.9rem;
+    margin: 0 auto; /* Ensure centering on smaller screens */
+    text-align: center;
+   
+  }
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    margin: 10px 0; /* Adjust button margin */
+  }
+  .video-card {
+    height: 250px; /* A bit smaller for mobile view */
+    margin-top: -180px; /* Further reduce negative margin */
+    border: 1px dashed rgba(255,255,255,0.2); /* Thinner border */
+  }
+  .video-card video {
+    height: 250px;
+  }
+  nav {
+    gap: 20px; /* Even smaller gap for very narrow screens */
+  }
+  header {
+    padding: 12px 0; /* Smaller header padding */
+  }
+  footer{
+    display: none;
+  }
+}
+
+/* Extra-small screens (e.g., phones) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  .video-card {
+    margin-top: -200px;
+    height: 250px;
+  }
+  .video-card video {
+    height: 250px;
+  }
+  main.site {
+    padding-top: 100px;
+  }
+}
+
+@media (max-height: 400px) {
+
+  h1 {
+    font-size: 2rem; /* aún más pequeño para caber bien */
+    line-height: 1.2;
+  }
+
+  p {
+    font-size: 0.8rem; /* texto más compacto */
+    padding: 0 10px;   /* margen interno para no pegarse a los bordes */
+  }
+
+  .btn {
+    font-size: 0.8rem;
+    padding: 8px 16px; /* botones más pequeños */
+    margin: 8px 0;
+  }
+
+  .video-card {
+    margin-top: -150px; /* ajusta el solapamiento con el título */
+    height: 200px;
+  }
+
+  .video-card video {
+    height: 200px;
+  }
+
+  nav {
+    gap: 15px; /* enlaces más juntos */
+  }
+
+  header {
+    padding: 10px 0;
+  }
+}
+
+
+
+
+
+@media (max-height: 300px) {
+  h1 {
+    font-size: 1.5rem; /* aún más pequeño para caber bien */
+    line-height: 1.2;
+  }
+
+  p {
+    font-size: 0.8rem; /* texto más compacto */
+    padding: 0 10px;   /* margen interno para no pegarse a los bordes */
+  }
+
+  .btn {
+    font-size: 0.8rem;
+    padding: 8px 16px; /* botones más pequeños */
+    margin: 8px 0;
+  }
+
+  .video-card {
+    margin-top: -200px; /* ajusta el solapamiento con el título */
+    height: 200px;
+  }
+
+  .video-card video {
+    height: 200px;
+  }
+
+  nav {
+    gap: 20px; /* enlaces más juntos */
+  }
+
+  header {
+    padding: 10px 0;
+  }
+}
+
+
+
+
+
+
+@media (max-width: 780px) and (max-height: 500px) {
+  footer {
+    display: none !important;
+  }
+}
+
+</style>
+</html>
