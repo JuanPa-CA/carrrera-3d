@@ -485,5 +485,80 @@ footer .social-icons .icon img:hover {
   }
 }
 
+
+/* Extra-extra small screens (teléfonos muy pequeños: 320px - 375px) */
+@media (max-width: 375px) {
+
+  /* ==== TITULO ==== */
+  h1 {
+    font-size: 2rem;       /* Más pequeño aún */
+    margin: 0 0 5px;
+    line-height: 1.1;
+  }
+
+  /* ==== TEXTO ==== */
+  p {
+    font-size: 0.75rem;    /* Texto compacto */
+    line-height: 1.3;
+    padding: 0 8px;
+    margin: 0 auto;
+    max-width: 90%;
+    text-align: center;
+  }
+
+  /* ==== BOTONES ==== */
+  .btn {
+    font-size: 0.75rem;
+    padding: 6px 14px;     /* Botón más reducido */
+    margin: 6px 0;
+  }
+
+  /* ==== VIDEO ==== */
+  .video-card {
+    margin-top: -190px;    /* Ajusta solapamiento */
+    height: 200px;         /* Más bajo */
+    border: 1px dashed rgba(255,255,255,0.15);
+  }
+
+  .video-card video {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  /* ==== NAVEGACIÓN ==== */
+  nav {
+    gap: 8px;              /* Enlaces más pegados */
+  }
+
+  nav a {
+    font-size: 0.7rem;     /* Enlaces más pequeños */
+    letter-spacing: 1px;
+    padding-top: 6px;
+  }
+
+  header {
+    padding: 6px 0;        /* Header más compacto */
+  }
+
+  /* ==== FOOTER ==== */
+  footer {
+    font-size: 0.7rem;
+    padding: 6px 10px;
+    flex-direction: column;   /* Pila vertical */
+    gap: 5px;
+    text-align: center;
+  }
+
+  footer .social-icons {
+    gap: 10px;
+  }
+
+  footer .social-icons .icon img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
 </style>
 </html>
