@@ -348,7 +348,7 @@ h1 {
     padding: 10px;
   }
   .circuito-card img {
-    max-width: 60%;
+    max-width: 50%;
     margin: 0 auto 10px;
   }
   .circuito-card h2 {
@@ -394,20 +394,158 @@ h1 {
   }
 }
 
+/* ================================
+   Responsividad Circuitos
+================================ */
+
+/* Tablets (<= 1024px) */
 @media (max-width: 1024px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  .circuitos-container {
+    grid-template-columns: repeat(2, 1fr); /* ✅ ahora 2 columnas */
+    gap: 20px;
+    padding: 15px;
+  }
+  .circuito-card h2 {
+    font-size: 1.3rem;
+  }
+  .circuito-card p {
+    font-size: 0.9rem;
+  }
+  .circuito-card .difficulty {
+    font-size: 0.8rem;
+  }
+  .acciones {
+    flex-direction: row;
+    gap: 15px;
+  }
   .btn {
     font-size: 1rem;
     padding: 12px 25px;
   }
 }
 
+/* Móviles medianos (<= 768px) */
 @media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  .circuitos-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 10px;
+  }
+  .circuito-card img {
+    max-width: 70%;
+    margin: 0 auto 10px;
+  }
+  .circuito-card h2 {
+    font-size: 1.1rem;
+  }
+  .circuito-card p {
+    font-size: 0.8rem;
+  }
+  .circuito-card .difficulty {
+    font-size: 0.75rem;
+  }
+  .acciones {
+    gap: 12px;
+  }
   .btn {
     font-size: 0.95rem;
     padding: 10px 20px;
   }
 }
+
+/* Móviles pequeños (<= 480px) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.7rem;
+  }
+  .circuitos-container {
+    grid-template-columns: 1fr; /* ✅ 1 columna */
+    gap: 12px;
+    padding: 8px;
+  }
+  .circuito-card {
+    padding: 15px;
+  }
+  .circuito-card h2 {
+    font-size: 1rem;
+  }
+  .circuito-card p {
+    font-size: 0.75rem;
+  }
+  .circuito-card .difficulty {
+    font-size: 0.7rem;
+  }
+  .acciones {
+    flex-direction: row;       /* ✅ botones en fila */
+    justify-content: center;   /* ✅ centrados */
+    gap: 10px;
+  }
+  .btn {
+    font-size: 0.85rem;
+    padding: 8px 16px;
+  }
+}
+
+/* Teléfonos muy pequeños (<= 375px) */
+@media (max-width: 375px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  nav {
+    gap: 15px;
+  }
+  nav a {
+    font-size: 0.75rem;
+  }
+  .circuito-card h2 {
+    font-size: 0.9rem;
+  }
+  .circuito-card p {
+    font-size: 0.7rem;
+  }
+  .btn {
+    font-size: 0.75rem;
+    padding: 7px 14px;
+  }
+  .acciones {
+    gap: 8px;
+  }
+}
+
+/* Teléfonos extremos (<= 320px) */
+@media (max-width: 320px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+  nav {
+    gap: 10px;
+  }
+  nav a {
+    font-size: 0.65rem;
+  }
+  .circuito-card h2 {
+    font-size: 0.8rem;
+  }
+  .circuito-card p {
+    font-size: 0.65rem;
+  }
+  .btn {
+    font-size: 0.7rem;
+    padding: 6px 12px;
+  }
+  .acciones {
+    gap: 6px;
+  }
+}
+
+
+
 </style>
 
 </html>
-
