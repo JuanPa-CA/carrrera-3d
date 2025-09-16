@@ -53,6 +53,7 @@
     }
 
     /* ===== Responsividad ===== */
+/* ===== Responsividad ===== */
 @media (max-width: 1024px) {
   .btn-inicio {
     padding: 12px 25px;
@@ -67,9 +68,33 @@
   }
 }
 
-.video{
-  overflow-y: hidden;
+/* ===== Teléfonos pequeños (<= 425px) ===== */
+@media (max-width: 425px) {
+  .btn-inicio {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    border-radius: 25px;
+  }
 }
+
+/* ===== Teléfonos muy pequeños (<= 375px) ===== */
+@media (max-width: 375px) {
+  .btn-inicio {
+    padding: 7px 16px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+  }
+}
+
+/* ===== Teléfonos extremos (<= 320px) ===== */
+@media (max-width: 320px) {
+  .btn-inicio {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    border-radius: 18px;
+  }
+}
+
 
 /* ===== Forzar modo horizontal ===== */
 @media (orientation: portrait) {
@@ -106,7 +131,6 @@
   <div class="video">
     <video id="trailer-video" autoplay muted loop playsinline>
       <source src="./vid/video.mp4" type="video/mp4">
-      Tu navegador no soporta el formato de video.
     </video>
   </div>
   <a href="index.html" class="btn-inicio">Inicio</a>
