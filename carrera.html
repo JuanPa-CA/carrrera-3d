@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Partida</title>
+  <title>Neon Rush - Inicio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #0ff;
+      --secondary: #ff0;
+      --white: #fff;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden; /* Evita barras de desplazamiento */
+      color: var(--white);
+    }
+
     .video {
       position: fixed;
       top: 0;
@@ -25,106 +44,120 @@
       object-fit: cover;
     }
 
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
+    /* Superposición de color para mejorar la legibilidad */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(255, 0, 255, 0.15));
+      backdrop-filter: brightness(0.7);
+      z-index: -1;
+    }
+
+    .content {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.5rem, 8vw, 6rem); /* Título responsivo */
+      margin: 0 0 10px 0;
+      letter-spacing: 5px;
+      color: var(--primary);
+      text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+      animation: glowText 2s infinite alternate;
+    }
+
+    .slogan {
+      font-size: clamp(0.8rem, 2vw, 1.5rem);
+      margin-top: 0;
+      letter-spacing: 2px;
+      color: var(--white);
+      text-shadow: 0 0 5px var(--white);
+      margin-bottom: 40px;
     }
 
     .btn-inicio {
       padding: 15px 40px;
       font-size: 1.2rem;
       font-weight: bold;
-      color: white;
-      background: rgba(0, 0, 0, 0.6);
-      border: 2px solid white;
-      border-radius: 30px;
+      color: black;
+      background: var(--primary);
+      border: none;
+      border-radius: 20px;
       text-decoration: none;
       transition: all 0.3s ease;
+      box-shadow: 0 0 10px var(--primary);
     }
 
     .btn-inicio:hover {
-      background: white;
-      color: black;
-      box-shadow: 0 0 20px white;
+      transform: scale(1.1);
+      background: var(--white);
+      box-shadow: 0 0 20px var(--white), 0 0 40px var(--white);
+    }
+    
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes glowText {
+      from { text-shadow: 0 0 10px var(--primary); }
+      to { text-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary); }
     }
 
     /* ===== Responsividad ===== */
-/* ===== Responsividad ===== */
-@media (max-width: 1024px) {
-  .btn-inicio {
-    padding: 12px 25px;
-    font-size: 1rem;
-  }
-}
+    @media (max-width: 768px) {
+      .btn-inicio {
+        padding: 12px 25px;
+        font-size: 1rem;
+      }
+    }
 
-@media (max-width: 768px) {
-  .btn-inicio {
-    padding: 10px 20px;
-    font-size: 0.95rem;
-  }
-}
+    @media (max-width: 480px) {
+      .btn-inicio {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+      }
+      .logo {
+        letter-spacing: 3px;
+      }
+      .slogan {
+        letter-spacing: 1px;
+      }
+    }
 
-/* ===== Teléfonos pequeños (<= 425px) ===== */
-@media (max-width: 425px) {
-  .btn-inicio {
-    padding: 8px 18px;
-    font-size: 0.9rem;
-    border-radius: 25px;
-  }
-}
+    /* ===== Forzar modo horizontal ===== */
+    @media (orientation: portrait) {
+      body::before {
+        content: "⚠️ Por favor gira tu dispositivo para vista horizontal";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #000;
+        color: #0ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 1.2rem;
+        z-index: 9;
+      }
 
-/* ===== Teléfonos muy pequeños (<= 375px) ===== */
-@media (max-width: 375px) {
-  .btn-inicio {
-    padding: 7px 16px;
-    font-size: 0.85rem;
-    border-radius: 20px;
-  }
-}
-
-/* ===== Teléfonos extremos (<= 320px) ===== */
-@media (max-width: 320px) {
-  .btn-inicio {
-    padding: 6px 14px;
-    font-size: 0.8rem;
-    border-radius: 18px;
-  }
-}
-
-
-/* ===== Forzar modo horizontal ===== */
-@media (orientation: portrait) {
-  body::before {
-    content: "⚠️ Por favor gira tu dispositivo para vista horizontal";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #000;
-    color: #0ff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 1.2rem;
-    z-index: 9;
-   
-  }
-
-  .btn-inicio,
-  .video {
-    display: none;
-  }
-  .video{
-  overflow-y: hidden;
-}
-
-}
+      .content,
+      .video,
+      .overlay {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -132,9 +165,13 @@
     <video id="trailer-video" autoplay muted loop playsinline>
       <source src="./vid/video.mp4" type="video/mp4">
     </video>
+    <div class="overlay"></div>
   </div>
-  <a href="index.html" class="btn-inicio">Inicio</a>
+
+  <main class="content">
+    <h1 class="logo">NEON RUSH</h1>
+    <p class="slogan">VELOCIDAD FUTURISTA</p>
+    <a href="index.html" class="btn-inicio">UNIRSE A LA PARTIDA</a>
+  </main>
 </body>
-
 </html>
-
