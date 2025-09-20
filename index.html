@@ -30,6 +30,7 @@
         <video id="trailer-video" autoplay muted loop>
                 <source src="./vid/video.mp4" type="video/mp4">
             </video>
+
     </div>
 
     <footer>
@@ -62,12 +63,15 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: radial-gradient(circle at top left, #0a0a0f, #1b0034, #000);
+background: radial-gradient(circle at top left, #ff00a8, #440047, #0a0a0f);
+
   color: var(--white);
   min-height: 100vh;
   overflow-x: hidden;
 
 }
+
+
 
 /* ================================
    Header y navegación
@@ -147,7 +151,6 @@ p {
   padding: 14px 28px;
   font-size: 1.1rem;
   border: none;
-  border-radius: 30px;
   font-family: 'Orbitron', sans-serif;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -164,14 +167,56 @@ p {
   box-shadow: 0 0 25px var(--primary), 0 0 50px var(--primary);
 }
 
+.btn.play {
+  background: var(--primary);
+  color: #000;
+  box-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
+  animation: pulseBtn 2.5s infinite ease-in-out; /* animación suave */
+}
+
+.btn.play:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 35px #00f0ff, 0 0 70px #00aaff;
+}
+
+/* Animación de pulso con tonos de azul */
+@keyframes pulseBtn {
+  0% {
+    transform: scale(1);
+    background: #00eaff; /* azul cian brillante */
+    box-shadow: 0 0 15px #00eaff, 0 0 30px #00bfff;
+  }
+  25% {
+    transform: scale(1.03);
+    background: #00c8ff; /* azul más intenso */
+    box-shadow: 0 0 20px #00c8ff, 0 0 40px #008cff;
+  }
+  50% {
+    transform: scale(1.05);
+    background: #009dff; /* azul eléctrico */
+    box-shadow: 0 0 25px #009dff, 0 0 50px #0066ff;
+  }
+  75% {
+    transform: scale(1.03);
+    background: #00c8ff;
+    box-shadow: 0 0 20px #00c8ff, 0 0 40px #008cff;
+  }
+  100% {
+    transform: scale(1);
+    background: #00eaff;
+    box-shadow: 0 0 15px #00eaff, 0 0 30px #00bfff;
+  }
+}
+
+
+
 /* ================================
    Video Card
 ================================ */
 .video-card {
-  margin-top: -300px;
+  margin-top: -340px;
   height: 320px;
   background: rgba(255,255,255,0.05);
-  border-radius: 12px;
   overflow: hidden; 
   border: 2px dashed rgba(255,255,255,0.2);
   animation: pulse 3s infinite;
@@ -185,9 +230,9 @@ p {
   width: 1000px;
   height: 320px;
   object-fit: fill;
-  border-radius: 12px;
   z-index: -2;
 }
+
 
 
 footer {
@@ -273,7 +318,7 @@ footer .social-icons .icon img:hover {
 }
 
 /* Tablets y móviles grandes en horizontal */
-@media (max-width: 1024px) and (min-width: 769px) {
+@media (max-width: 1034px) and (min-width: 769px) {
   h1 {
     font-size: 4.5rem;
   }
@@ -281,7 +326,7 @@ footer .social-icons .icon img:hover {
     max-width: 80%;
   }
   .video-card {
-    margin-top: -220px;
+    margin-top: -280px;
   }
 }
 
@@ -425,7 +470,7 @@ footer .social-icons .icon img:hover {
 /* ================================
    RESPONSIVIDAD
 ================================ */
-@media (max-width: 1024px) {
+@media (max-width: 1440px) {
   h1 {
     font-size: 5rem;
   }
@@ -518,7 +563,7 @@ footer .social-icons .icon img:hover {
   }
 
   .video-card {
-    margin-top: -140px; /* ajusta el solapamiento con el título */
+    margin-top: -170px; /* ajusta el solapamiento con el título */
     height: 200px;
   }
 
@@ -557,7 +602,7 @@ footer .social-icons .icon img:hover {
   }
 
   .video-card {
-    margin-top: -200px; /* ajusta el solapamiento con el título */
+    margin-top: -190px; /* ajusta el solapamiento con el título */
     height: 200px;
   }
 
@@ -615,7 +660,7 @@ footer .social-icons .icon img:hover {
 
   /* ==== VIDEO ==== */
   .video-card {
-    margin-top: -190px;    /* Ajusta solapamiento */
+    margin-top: -160px;    /* Ajusta solapamiento */
     height: 200px;         /* Más bajo */
     border: 1px dashed rgba(255,255,255,0.15);
   }
