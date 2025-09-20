@@ -252,6 +252,106 @@ footer .social-icons .icon img:hover {
 /* ================================
    RESPONSIVIDAD
 ================================ */
+/* ================================
+   OPTIMIZACIÓN RESPONSIVIDAD
+================================ */
+
+/* Pantallas ultra anchas (ej: monitores grandes) */
+@media (min-width: 1440px) {
+  main.site {
+    max-width: 1200px; /* más ancho para aprovechar espacio */
+  }
+  h1 {
+    font-size: 8rem; /* título más grande */
+  }
+  .video-card {
+    height: 400px;
+  }
+  .video-card video {
+    height: 400px;
+  }
+}
+
+/* Tablets y móviles grandes en horizontal */
+@media (max-width: 1024px) and (min-width: 769px) {
+  h1 {
+    font-size: 4.5rem;
+  }
+  p {
+    max-width: 80%;
+  }
+  .video-card {
+    margin-top: -220px;
+  }
+}
+
+/* Entre 600px y 768px (muchas tablets y móviles en horizontal) */
+@media (max-width: 768px) and (min-width: 600px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+  nav {
+    gap: 15px;
+  }
+  .video-card {
+    height: 220px;
+    margin-top: -160px;
+  }
+  .video-card video {
+    height: 220px;
+    object-fit: cover;
+  }
+}
+
+/* Entre 500px y 600px (celulares grandes en vertical) */
+@media (max-width: 600px) and (min-width: 500px) {
+  h1 {
+    font-size: 3rem;
+  }
+  p {
+    font-size: 0.9rem;
+  }
+  .btn {
+    padding: 8px 18px;
+    font-size: 0.85rem;
+  }
+  .video-card {
+    height: 200px;
+    margin-top: -150px;
+  }
+  nav {
+    gap: 10px;
+  }
+}
+
+/* Ajustar video con proporción fija para evitar cortes bruscos */
+.video-card video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 1024px) {
   h1 {
     font-size: 5rem;
@@ -418,7 +518,7 @@ footer .social-icons .icon img:hover {
   }
 
   .video-card {
-    margin-top: -150px; /* ajusta el solapamiento con el título */
+    margin-top: -170px; /* ajusta el solapamiento con el título */
     height: 200px;
   }
 
