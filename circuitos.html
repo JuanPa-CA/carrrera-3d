@@ -76,9 +76,6 @@
 </body>
 
 <style>
-/* ================================
-    Circuitos - Estilo Futurista Morado Animado
-================================ */
 :root {
     --primary-neon: #f0f;
     --secondary-neon: #0ff;
@@ -97,7 +94,7 @@ body {
     animation: fadeIn 1s ease-in;
 }
 
-/* ===== Header y navegación ===== */
+
 header {
     position: fixed;
     top: 0;
@@ -136,7 +133,6 @@ nav a.active {
     text-shadow: 0 0 12px var(--primary-neon), 0 0 20px var(--primary-neon);
 }
 
-/* Espaciado por header fijo */
 .site {
     padding-top: 120px;
     max-width: 1200px;
@@ -144,7 +140,6 @@ nav a.active {
     animation: slideUp 1.2s ease-out;
 }
 
-/* ===== Título ===== */
 h1 {
     text-align: center;
     font-size: 3rem;
@@ -154,7 +149,6 @@ h1 {
     animation: glowText 2s infinite alternate;
 }
 
-/* ===== Grid de circuitos ===== */
 .circuitos-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -162,7 +156,6 @@ h1 {
     padding: 20px;
 }
 
-/* ===== Tarjeta de circuito ===== */
 .circuito-card {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
@@ -185,8 +178,8 @@ h1 {
 /* Icono de flama */
 .flame-icon {
     position: absolute;
-    top: 10px; /* Posicionamiento responsivo */
-    left: 10px; /* Posicionamiento responsivo */
+    top: 10px; 
+    left: 10px; 
     width: 35px;
     height: 35px;
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FF4500"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.4-.76-3.8-2.67-4.2-4.13-.5-1.9 0-3.92 1.5-5.4 1.58-1.58 3.5-1.9 5.2-.87 1.7.9 2.5 2.5 2 4.1-.3 1.2-1.3 2.5-2.5 3.1-.9.5-2 .7-3 .2z"/></svg>');
@@ -197,7 +190,6 @@ h1 {
     z-index: 10;
 }
 
-/* Imagen */
 .circuito-card img {
     width: 100%;
     border-radius: 5px;
@@ -205,7 +197,6 @@ h1 {
     animation: pulse 5s infinite;
 }
 
-/* Nombre del circuito */
 .circuito-card h2 {
     font-size: 1.5rem;
     color: var(--primary-neon);
@@ -213,14 +204,12 @@ h1 {
     margin-bottom: 10px;
 }
 
-/* Descripción */
 .circuito-card p {
     font-size: 1rem;
     color: #ccc;
     margin-bottom: 12px;
 }
 
-/* Estilos para la dificultad */
 .circuito-card .difficulty {
     display: inline-block;
     padding: 6px 12px;
@@ -273,15 +262,13 @@ h1 {
 }
 
 
-/* ===== Botones de acción ===== */
 .acciones {
     display: flex;
     justify-content: center;
     gap: 30px;
     margin: 50px 0;
-    /* Por defecto, los botones están en fila */
     flex-direction: row; 
-    align-items: center; /* Asegura la alineación vertical */
+    align-items: center; 
 }
 
 .btn {
@@ -291,7 +278,7 @@ h1 {
     font-family: 'Orbitron', sans-serif;
     text-decoration: none;
     transition: transform 0.3s, box-shadow 0.3s;
-    white-space: nowrap; /* Evita que el texto se rompa */
+    white-space: nowrap; 
 }
 
 .btn.atras {
@@ -354,13 +341,9 @@ h1 {
 
 
 
-/* ================================
-    Responsividad Mejorada
-================================ */
 
-/* Tablets (ancho <= 1024px) */
+
 @media (max-width: 1024px) {
-    /* Ajustes generales */
     h1 { font-size: 2.5rem; }
     .circuitos-container {
         grid-template-columns: repeat(2, 1fr);
@@ -371,78 +354,70 @@ h1 {
     .circuito-card p { font-size: 0.9rem; }
     .circuito-card .difficulty { font-size: 0.8rem; padding: 5px 10px; }
     
-    /* Mejora para el Header */
     nav {
-        gap: 25px; /* Reduce el espacio entre enlaces */
+        gap: 25px; 
     }
-    /* Los botones de acción (.acciones) se mantienen en fila por defecto */
     .acciones {
-        gap: 20px; /* Reduce un poco el espacio entre ellos */
+        gap: 20px;
     }
     .btn { font-size: 1rem; padding: 12px 25px; }
 
     .flame-icon {
-        width: 40px; /* Ajuste para tablets */
+        width: 40px;
         height: 40px;
         top: 8px;
         right: 8px;
     }
 }
 
-/* Móviles (ancho <= 768px) */
 @media (max-width: 768px) {
-    /* Ajustes generales */
     h1 { font-size: 2rem; }
     .circuitos-container {
-        grid-template-columns: 1fr; /* Una columna en móviles */
-        gap: 15px;
-        padding: 10px;
+        grid-template-columns: 2fr 
+    
+        
     }
     .circuito-card img { max-width: 70%; margin: 0 auto 10px; }
     .circuito-card h2 { font-size: 1.1rem; }
     .circuito-card p { font-size: 0.8rem; }
     .circuito-card .difficulty { font-size: 0.75rem; padding: 4px 8px; }
-
-    /* Mejora para los botones de acción: ahora se apilan */
     .acciones {
-        flex-direction: column; /* Apila los botones verticalmente */
+        flex-direction: column;
         gap: 15px;
         margin: 30px 0;
     }
     .btn {
-        width: 50%; /* Los botones ocupan el 80% del ancho */
-        max-width: 140px; /* Ancho máximo para que no sean demasiado grandes */
+        width: 50%;
+        max-width: 140px; 
         font-size: 1rem;
         text-align: center;
-      
     }
     
-    /* Mejora para el Header */
+   
     nav {
-        gap: 15px; /* Más espacio para los enlaces en móviles */
+        gap: 15px; 
     }
     nav a {
         font-size: 0.8rem;
     }
 
     .flame-icon {
-        width: 40px; /* Ajuste para móviles */
+        width: 40px; 
         height: 40px;
         top: 6px;
         right: 6px;
     }
 }
 
-/* Móviles muy pequeños (ancho <= 480px) */
+
 @media (max-width: 480px) {
-    /* Ajustes generales */
     h1 { font-size: 1.7rem; }
     .circuito-card { padding: 15px; }
     .circuito-card h2 { font-size: 1rem; }
     .circuito-card p { font-size: 0.75rem; }
     .circuito-card .difficulty { font-size: 0.7rem; }
 
-    /* Header aún más compacto */
+
     nav {
         gap: 8px;
     }
@@ -450,9 +425,9 @@ h1 {
         font-size: 0.65rem;
     }
 
-    /* Botones de acción se mantienen apilados, solo ajusta tamaño */
+
     .btn {
-        width: 50%; /* Un poco más de ancho en pantallas muy pequeñas */
+        width: 50%; 
         max-width: 150px;
         font-size: 0.9rem;
         padding: 10px 18px;
@@ -467,14 +442,14 @@ h1 {
     }
 
     .flame-icon {
-        width: 30px; /* Ajuste para móviles pequeños */
+        width: 30px; 
         height: 30px;
         top: 5px;
         right: 5px;
     }
 }
 
-/* Forzar modo horizontal */
+
 @media (orientation: portrait) {
     body::before {
         content: "⚠️ Por favor gira tu dispositivo para vista horizontal";
@@ -500,4 +475,3 @@ h1 {
 </style>
 
 </html>
-
