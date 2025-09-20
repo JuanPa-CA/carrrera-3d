@@ -367,7 +367,7 @@ h1 {
     /* Ajustes generales */
     h1 { font-size: 2rem; }
     .circuitos-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2fr, 1) ;
         gap: 15px;
         padding: 10px;
     }
@@ -423,6 +423,14 @@ h1 {
         font-size: 0.9rem;
         padding: 10px 18px;
         text-align: center;
+      
+    }
+
+
+    .circuitos-container {
+        grid-template-columns: 1fr ;
+        gap: 10px;
+        padding: 5px;
     }
 }
 
@@ -452,4 +460,3 @@ h1 {
 </style>
 
 </html>
-
