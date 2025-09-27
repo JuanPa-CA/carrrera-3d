@@ -5,6 +5,422 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Circuitos - Neon Rush</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-neon: #f0f;
+            --secondary-neon: #0ff;
+            --low-diff-color: #00ffff;
+            --med-diff-color: #ffa500;
+            --high-diff-color: rgb(233, 195, 145);
+            --hard-diff-color: #ff0000;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: radial-gradient(circle at top, #0d0d0d, #1b0034);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            animation: fadeIn 1s ease-in;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 0, 25, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 15px 0;
+            box-shadow: 0 0 15px rgba(255,0,255,0.4);
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 90px;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-neon);
+            text-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon);
+        }
+
+        nav a.active {
+            color: var(--primary-neon);
+            font-weight: bold;
+            text-shadow: 0 0 12px var(--primary-neon), 0 0 20px var(--primary-neon);
+        }
+
+        /* AJUSTE CLAVE: Permite que el contenido ocupe todo el ancho y se centre correctamente */
+        .site {
+            padding-top: 120px; 
+            max-width: none; /* ELIMINADO para centrado global */
+            width: 100%;
+            margin: 0 auto;
+            animation: slideUp 1.2s ease-out;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            color: var(--primary-neon);
+            text-shadow: 0 0 15px var(--primary-neon), 0 0 30px var(--primary-neon);
+            margin: 20px 0 40px;
+            animation: glowText 2s infinite alternate;
+        }
+
+        /* =========================================================
+           ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
+        ========================================================= */
+
+        .slider-wrapper {
+            position: relative;
+            width: 390px; 
+            height: auto;
+            margin: 40px auto; /* Centrado horizontal */
+            overflow: hidden; 
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+            background: rgba(10, 0, 25, 0.7);
+        }
+
+        .circuitos-container {
+            display: flex;
+            width: 2100px; /* 6 * 350px */
+            padding: 0;
+            gap: 0;
+            transition: transform 0.5s ease-in-out;
+            grid-template-columns: none; 
+        }
+
+        .circuito-card {
+            flex: 0 0 350px; 
+            width: 350px; 
+            padding: 20px;
+            margin: 0; 
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+            transition: none;
+            animation: none;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .circuito-card:hover {
+            transform: none; 
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+        }
+        
+        /* Lógica del Slider: Desplazamiento en Pixeles */
+     #slide1:checked ~ .circuitos-container { transform: translateX(0); }
+    #slide2:checked ~ .circuitos-container { transform: translateX(-395px); } /* 1 x 350px */
+    #slide3:checked ~ .circuitos-container { transform: translateX(-780px); } /* 2 x 350px */
+    #slide4:checked ~ .circuitos-container { transform: translateX(-1170px); } /* 3 x 350px */
+    #slide5:checked ~ .circuitos-container { transform: translateX(-1560px); } /* 4 x 350px */
+    #slide6:checked ~ .circuitos-container { transform: translateX(-1950px); }
+
+        
+        /* Estilos para los Puntos de Navegación */
+        .slider-nav {
+            position: relative;
+            text-align: center;
+            z-index: 20;
+        }
+
+        .slider-nav label {
+            display:inline-block;
+            width: 15px;
+            height: 15px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .slider-nav label:hover {
+            background: var(--primary-neon);
+            box-shadow: 0 0 10px var(--primary-neon);
+        }
+
+        /* Lógica de los puntos de navegación activos */
+        .slider-radio:checked ~ .slider-nav label { background: rgba(255, 255, 255, 0.4); box-shadow: none; }
+        #slide1:checked ~ .slider-nav label:nth-child(1),
+        #slide2:checked ~ .slider-nav label:nth-child(2),
+        #slide3:checked ~ .slider-nav label:nth-child(3),
+        #slide4:checked ~ .slider-nav label:nth-child(4),
+        #slide5:checked ~ .slider-nav label:nth-child(5),
+        #slide6:checked ~ .slider-nav label:nth-child(6) {
+             background: var(--primary-neon); 
+             box-shadow: 0 0 10px var(--primary-neon);
+        }
+
+        /* Ocultar los radio buttons */
+        .slider-radio {
+            display: none;
+        }
+        
+        /* Contenido de la tarjeta */
+        
+        .flame-icon {
+            position: absolute;
+            top: 10px; 
+            right: 10px;
+            left: auto;
+            width: 35px;
+            height: 35px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FF4500"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.4-.76-3.8-2.67-4.2-4.13-.5-1.9 0-3.92 1.5-5.4 1.58-1.58 3.5-1.9 5.2-.87 1.7.9 2.5 2.5 2 4.1-.3 1.2-1.3 2.5-2.5 3.1-.9.5-2 .7-3 .2z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 5px orange);
+            animation: flamePulse 1s infinite alternate;
+            z-index: 10;
+        }
+        
+        /* AJUSTE: Mejorar visualización de imagen dentro de la tarjeta */
+        .circuito-card img {
+            width: 90%; 
+            max-height: 200px; /* Limitar altura */
+            object-fit: contain;
+            border-radius: 5px;
+            margin: 0 auto 15px; 
+            animation: pulse 5s infinite;
+        }
+
+        .circuito-card h2 {
+            font-size: 1.5rem;
+            color: var(--primary-neon);
+            text-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon);
+            margin-bottom: 10px;
+        }
+
+        .circuito-card p {
+            font-size: 1rem;
+            color: #ccc;
+            margin-bottom: 12px;
+            height: 40px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circuito-card .difficulty {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        /* Colores de dificultad específicos */
+        .circuito-card:nth-child(1) .difficulty, 
+        .circuito-card:nth-child(6) .difficulty { 
+            background: rgba(132, 153, 16, 0.274);
+            color: var(--med-diff-color);
+        }
+        .circuito-card:nth-child(2) .difficulty, 
+        .circuito-card:nth-child(5) .difficulty { 
+            background: rgba(253, 186, 42, 0.2);
+            color: var(--high-diff-color);
+        }
+        .circuito-card:nth-child(3) .difficulty { 
+            background: rgba(255, 0, 0, 0.2);
+            color: var(--hard-diff-color);
+        }
+        .circuito-card:nth-child(4) .difficulty { 
+            background: rgba(0, 255, 255, 0.2);
+            color: var(--low-diff-color);
+        }
+
+        .btn-select {
+            margin-top: 10px;
+            padding: 10px 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.80rem;
+            border: none;
+            border-radius: 25px;
+            background: var(--primary-neon);
+            color: #000;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-left: 20px;
+            width: 40%;
+          
+        }
+
+        .btn-select:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--primary-neon), 0 0 50px var(--primary-neon);
+        }
+
+
+        /* AJUSTE: Centrado de los botones de acción */
+        .acciones {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 50px auto; 
+            max-width: 400px;
+            flex-direction: row; 
+            align-items: center; 
+        }
+
+        .btn {
+            padding: 14px 30px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            font-family: 'Orbitron', sans-serif;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            white-space: nowrap; 
+        }
+
+        .btn.atras {
+            background: rgba(255, 0, 255, 0.2);
+            color: #fff;
+            box-shadow: 0 0 10px var(--primary-neon);
+        }
+
+        .btn.atras:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--primary-neon);
+        }
+
+        .btn.iniciar {
+            background: var(--primary-neon);
+            color: #000;
+            font-weight: bold;
+            box-shadow: 0 0 20px var(--primary-neon), 0 0 40px var(--primary-neon);
+            animation: pulseGlow 1.5s infinite alternate;
+        }
+
+        .btn.iniciar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px var(--primary-neon), 0 0 80px var(--primary-neon);
+        }
+
+        /* ================================
+           Animaciones Keyframes
+        ================================ */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes glowText {
+            from { text-shadow: 0 0 10px var(--primary-neon); }
+            to { text-shadow: 0 0 20px var(--primary-neon), 0 0 40px var(--primary-neon); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--primary-neon)); }
+            50% { transform: scale(1.02); filter: drop-shadow(0 0 15px var(--primary-neon)); }
+        }
+
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 20px var(--primary-neon), 0 0 40px var(--primary-neon); }
+            to { box-shadow: 0 0 40px var(--primary-neon), 0 0 80px var(--primary-neon); }
+        }
+        
+        @keyframes flamePulse {
+             0%, 100% { opacity: 1; filter: drop-shadow(0 0 5px orange); }
+             50% { opacity: 0.8; filter: drop-shadow(0 0 10px red); }
+        }
+
+
+
+        /* Modo Retrato (sin cambios) */
+        @media (orientation: portrait) {
+            body::before {
+                content: "⚠️ Por favor gira tu dispositivo para vista horizontal";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: #0d0d0d;
+                color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                font-size: 1.2rem;
+                z-index: 9999;
+            }
+            main.site,
+            header {
+                display: none;
+            }
+        }
+
+
+        @media (max-width: 850px) and (orientation: landscape) {
+    /* AJUSTE RESPONSIVE: Reducir el tamaño de la tarjeta para que quepa mejor */
+    :root {
+        --card-width: 300px; /* Reducido de 350px a 300px */
+        --slide-offset: calc(var(--card-width) + 0px);
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+        margin-top: 10px;
+    }
+    
+    header {
+        padding: 10px 0;
+    }
+    
+    nav {
+        gap: 40px;
+    }
+    nav a{
+        font-size: 12px;
+    }
+    
+    .site {
+        padding-top: 80px; /* Ajuste para el header más pequeño */
+    }
+    
+    .slider-wrapper {
+        margin: 20px auto;
+    }
+    
+    .acciones {
+        gap: 30px;
+        margin: 30px auto;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+    </style>
 </head>
 <body>
     <header>
@@ -18,460 +434,86 @@
     <main class="site">
         <h1>Circuitos</h1>
 
-        <div class="circuitos-container">
-            <div class="circuito-card">
-                <img src="./img/Neon City.png" alt="Circuito Neon City">
-                <h2>Neon City</h2>
-                <p>Circuito veloz con curvas cerradas y saltos. Requiere buena aceleración.</p>
-                <span class="difficulty">Media</span>
-                <button class="btn-select" onclick="alert('Neon City Seleccionado')">Seleccionar</button>
-            </div>
+        <div class="slider-wrapper">
 
-            <div class="circuito-card">
-                <div class="flame-icon"></div> <img src="./img/Void Loop.png" alt="Circuito Void Loop">
-                <h2>Void Loop</h2>
-                <p>Pistas largas y rectas. Máxima velocidad, poca maniobrabilidad.</p>
-                <span class="difficulty">Alta</span>
-                <button class="btn-select" onclick="alert('Void Loop Seleccionado')">Seleccionar</button>
-            </div>
+            <input type="radio" name="slider" id="slide1" class="slider-radio" checked>
+            <input type="radio" name="slider" id="slide2" class="slider-radio">
+            <input type="radio" name="slider" id="slide3" class="slider-radio">
+            <input type="radio" name="slider" id="slide4" class="slider-radio">
+            <input type="radio" name="slider" id="slide5" class="slider-radio">
+            <input type="radio" name="slider" id="slide6" class="slider-radio">
 
-            <div class="circuito-card">
-                <div class="flame-icon"></div> <img src="./img/Cyber Canyon.png" alt="Circuito Cyber Canyon">
-                <h2>Cyber Canyon</h2>
-                <p>Un recorrido montañoso con túneles iluminados y saltos extremos.</p>
-                <span class="difficulty">Difícil</span>
-                <button class="btn-select" onclick="alert('Cyber Canyon Seleccionado')">Seleccionar</button>
-            </div>
+            <div class="circuitos-container">
+                
+                <div class="circuito-card">
+                    <img src="./img/Neon City.png" alt="Circuito Neon City">
+                    <h2>Neon City</h2>
+                    <p>Circuito veloz con curvas cerradas y saltos. Requiere buena aceleración.</p>
+                    <span class="difficulty">Media</span>
+                    <button class="btn-select" onclick="alert('Neon City Seleccionado')">Seleccionar</button>
+                </div>
 
-            <div class="circuito-card">
-                <img src="./img/Plasma Dunes.png" alt="Circuito Plasma Dunes">
-                <h2>Plasma Dunes</h2>
-                <p>Terreno arenoso con giros amplios, ideal para coches de gran manejo.</p>
-                <span class="difficulty">Baja</span>
-                <button class="btn-select" onclick="alert('Plasma Dunes Seleccionado')">Seleccionar</button>
-            </div>
+                <div class="circuito-card">
+                    <div class="flame-icon"></div> 
+                    <img src="./img/Void Loop.png" alt="Circuito Void Loop">
+                    <h2>Void Loop</h2>
+                    <p>Pistas largas y rectas. Máxima velocidad, poca maniobrabilidad.</p>
+                    <span class="difficulty">Alta</span>
+                    <button class="btn-select" onclick="alert('Void Loop Seleccionado')">Seleccionar</button>
+                </div>
 
-            <div class="circuito-card">
-                <div class="flame-icon"></div> <img src="./img/Quantum Drift.png" alt="Circuito Quantum Drift">
-                <h2>Quantum Drift</h2>
-                <p>Pistas flotantes en gravedad cero, requiere precisión en los giros.</p>
-                <span class="difficulty">Alta</span>
-                <button class="btn-select" onclick="alert('Quantum Drift Seleccionado')">Seleccionar</button>
-            </div>
+                <div class="circuito-card">
+                    <div class="flame-icon"></div> 
+                    <img src="./img/Cyber Canyon.png" alt="Circuito Cyber Canyon">
+                    <h2>Cyber Canyon</h2>
+                    <p>Un recorrido montañoso con túneles iluminados y saltos extremos.</p>
+                    <span class="difficulty">Difícil</span>
+                    <button class="btn-select" onclick="alert('Cyber Canyon Seleccionado')">Seleccionar</button>
+                </div>
 
-            <div class="circuito-card">
-                <img src="./img/Nova Horizon.png" alt="Circuito Nova Horizon">
-                <h2>Nova Horizon</h2>
-                <p>Circuito en desierto cósmico con tormentas de plasma intermitentes.</p>
-                <span class="difficulty">Media</span>
-                <button class="btn-select" onclick="alert('Nova Horizon Seleccionado')">Seleccionar</button>
+                <div class="circuito-card">
+                    <img src="./img/Plasma Dunes.png" alt="Circuito Plasma Dunes">
+                    <h2>Plasma Dunes</h2>
+                    <p>Terreno arenoso con giros amplios, ideal para coches de gran manejo.</p>
+                    <span class="difficulty">Baja</span>
+                    <button class="btn-select" onclick="alert('Plasma Dunes Seleccionado')">Seleccionar</button>
+                </div>
+
+                <div class="circuito-card">
+                    <div class="flame-icon"></div> 
+                    <img src="./img/Quantum Drift.png" alt="Circuito Quantum Drift">
+                    <h2>Quantum Drift</h2>
+                    <p>Pistas flotantes en gravedad cero, requiere precisión en los giros.</p>
+                    <span class="difficulty">Alta</span>
+                     <span>BLOQUEADO</span>
+                </div>
+
+                <div class="circuito-card">
+                    <img src="./img/Nova Horizon.png" alt="Circuito Nova Horizon">
+                    <h2>Nova Horizon</h2>
+                    <p>Circuito en desierto cósmico con tormentas de plasma intermitentes.</p>
+                    <span class="difficulty">Media</span>
+                    <button class="btn-select" onclick="alert('Nova Horizon Seleccionado')">Seleccionar</button>
+                </div>
             </div>
         </div>
 
+           <div class="slider-nav">
+                <label for="slide1" title="Neon City"></label>
+                <label for="slide2" title="Void Loop"></label>
+                <label for="slide3" title="Cyber Canyon"></label>
+                <label for="slide4" title="Plasma Dunes"></label>
+                <label for="slide5" title="Quantum Drift"></label>
+                <label for="slide6" title="Nova Horizon"></label>
+            </div>
         <div class="acciones">
+            
+            
             <a href="vehiculos.html" class="btn atras">⬅ Atrás</a>
             <a href="carrera.html" class="btn iniciar">▶ Jugar Ahora</a>
         </div>
+
+        
     </main>
 </body>
-
-<style>
-:root {
-    --primary-neon: #f0f;
-    --secondary-neon: #0ff;
-    --low-diff-color: #00ffff;
-    --med-diff-color: #ffa500;
-    --high-diff-color: #ff00ff;
-    --hard-diff-color: #ff0000;
-}
-
-body {
-    font-family: 'Orbitron', sans-serif;
-    background: radial-gradient(circle at top, #0d0d0d, #1b0034);
-    color: #fff;
-    margin: 0;
-    padding: 0;
-    animation: fadeIn 1s ease-in;
-}
-
-
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(10, 0, 25, 0.85);
-    backdrop-filter: blur(8px);
-    padding: 15px 0;
-    box-shadow: 0 0 15px rgba(255,0,255,0.4);
-    z-index: 1000;
-}
-
-nav {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-}
-
-nav a {
-    text-decoration: none;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1rem;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    transition: color 0.3s, text-shadow 0.3s;
-}
-
-nav a:hover {
-    color: var(--primary-neon);
-    text-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon);
-}
-
-nav a.active {
-    color: var(--primary-neon);
-    font-weight: bold;
-    text-shadow: 0 0 12px var(--primary-neon), 0 0 20px var(--primary-neon);
-}
-
-.site {
-    padding-top: 120px;
-    max-width: 1200px;
-    margin: auto;
-    animation: slideUp 1.2s ease-out;
-}
-
-h1 {
-    text-align: center;
-    font-size: 3rem;
-    color: var(--primary-neon);
-    text-shadow: 0 0 15px var(--primary-neon), 0 0 30px var(--primary-neon);
-    margin: 20px 0 40px;
-    animation: glowText 2s infinite alternate;
-}
-
-.circuitos-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    padding: 20px;
-}
-
-.circuito-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fadeInCard 1.2s ease forwards;
-    position: relative;
-    overflow: hidden;
-}
-
-.circuito-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(255, 0, 255, 0.8),
-                0 0 60px rgba(255, 0, 255, 0.6);
-}
-
-/* Icono de flama */
-.flame-icon {
-    position: absolute;
-    top: 10px; 
-    left: 10px; 
-    width: 35px;
-    height: 35px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FF4500"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.4-.76-3.8-2.67-4.2-4.13-.5-1.9 0-3.92 1.5-5.4 1.58-1.58 3.5-1.9 5.2-.87 1.7.9 2.5 2.5 2 4.1-.3 1.2-1.3 2.5-2.5 3.1-.9.5-2 .7-3 .2z"/></svg>');
-    background-size: contain;
-    background-repeat: no-repeat;
-    filter: drop-shadow(0 0 5px orange);
-    animation: flamePulse 1s infinite alternate;
-    z-index: 10;
-}
-
-.circuito-card img {
-    width: 100%;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    animation: pulse 5s infinite;
-}
-
-.circuito-card h2 {
-    font-size: 1.5rem;
-    color: var(--primary-neon);
-    text-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon);
-    margin-bottom: 10px;
-}
-
-.circuito-card p {
-    font-size: 1rem;
-    color: #ccc;
-    margin-bottom: 12px;
-}
-
-.circuito-card .difficulty {
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 0.9rem;
-    font-family: 'Orbitron', sans-serif;
-}
-
-/* Colores de dificultad específicos */
-.circuito-card:nth-child(1) .difficulty, /* Neon City */
-.circuito-card:nth-child(6) .difficulty { /* Nova Horizon */
-    background: rgba(132, 153, 16, 0.274);
-    color: var(--med-diff-color);
-}
-.circuito-card:nth-child(2) .difficulty, /* Void Loop */
-.circuito-card:nth-child(5) .difficulty { /* Quantum Drift */
-    background: rgba(253, 186, 42, 0.2);
-    color: rgb(233, 195, 145);
-}
-.circuito-card:nth-child(3) .difficulty { /* Cyber Canyon */
-    background: rgba(255, 0, 0, 0.2);
-    color: var(--hard-diff-color);
-}
-.circuito-card:nth-child(4) .difficulty { /* Plasma Dunes */
-    background: rgba(0, 255, 255, 0.2);
-    color: var(--low-diff-color);
-}
-
-/* Botón seleccionar en tarjeta */
-.btn-select {
-    margin-top: 10px;
-    padding: 10px 10px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.80rem;
-    border: none;
-    border-radius: 25px;
-    background: var(--primary-neon);
-    color: #000;
-    cursor: pointer;
-    box-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon);
-    transition: transform 0.3s, box-shadow 0.3s;
-    margin-left: 30px;
-    
-}
-
-.btn-select:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px var(--primary-neon), 0 0 50px var(--primary-neon);
-}
-
-
-.acciones {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 50px 0;
-    flex-direction: row; 
-    align-items: center; 
-}
-
-.btn {
-    padding: 14px 30px;
-    font-size: 1.2rem;
-    border-radius: 30px;
-    font-family: 'Orbitron', sans-serif;
-    text-decoration: none;
-    transition: transform 0.3s, box-shadow 0.3s;
-    white-space: nowrap; 
-}
-
-.btn.atras {
-    background: rgba(255, 0, 255, 0.2);
-    color: #fff;
-    box-shadow: 0 0 10px var(--primary-neon);
-}
-
-.btn.atras:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px var(--primary-neon);
-}
-
-.btn.iniciar {
-    background: var(--primary-neon);
-    color: #000;
-    font-weight: bold;
-    box-shadow: 0 0 20px var(--primary-neon), 0 0 40px var(--primary-neon);
-    animation: pulseGlow 1.5s infinite alternate;
-}
-
-.btn.iniciar:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 40px var(--primary-neon), 0 0 80px var(--primary-neon);
-}
-
-/* ================================
-    Animaciones Keyframes
-================================ */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes glowText {
-    from { text-shadow: 0 0 10px var(--primary-neon); }
-    to { text-shadow: 0 0 20px var(--primary-neon), 0 0 40px var(--primary-neon); }
-}
-
-@keyframes fadeInCard {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--primary-neon)); }
-    50% { transform: scale(1.05); filter: drop-shadow(0 0 15px var(--primary-neon)); }
-}
-
-@keyframes pulseGlow {
-    from { box-shadow: 0 0 20px var(--primary-neon), 0 0 40px var(--primary-neon); }
-    to { box-shadow: 0 0 40px var(--primary-neon), 0 0 80px var(--primary-neon); }
-}
-
-
-
-
-
-
-@media (max-width: 1024px) {
-    h1 { font-size: 2.5rem; }
-    .circuitos-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        padding: 15px;
-    }
-    .circuito-card h2 { font-size: 1.3rem; }
-    .circuito-card p { font-size: 0.9rem; }
-    .circuito-card .difficulty { font-size: 0.8rem; padding: 5px 10px; }
-    
-    nav {
-        gap: 25px; 
-    }
-    .acciones {
-        gap: 20px;
-    }
-    .btn { font-size: 1rem; padding: 12px 25px; }
-
-    .flame-icon {
-        width: 40px;
-        height: 40px;
-        top: 8px;
-        right: 8px;
-    }
-}
-
-@media (max-width: 768px) {
-    h1 { font-size: 2rem; }
-    .circuitos-container {
-        grid-template-columns: 2fr 
-    
-        
-    }
-    .circuito-card img { max-width: 70%; margin: 0 auto 10px; }
-    .circuito-card h2 { font-size: 1.1rem; }
-    .circuito-card p { font-size: 0.8rem; }
-    .circuito-card .difficulty { font-size: 0.75rem; padding: 4px 8px; }
-    .acciones {
-        flex-direction: column;
-        gap: 15px;
-        margin: 30px 0;
-    }
-    .btn {
-        width: 50%;
-        max-width: 140px; 
-        font-size: 1rem;
-        text-align: center;
-    }
-    
-   
-    nav {
-        gap: 15px; 
-    }
-    nav a {
-        font-size: 0.8rem;
-    }
-
-    .flame-icon {
-        width: 40px; 
-        height: 40px;
-        top: 6px;
-        right: 6px;
-    }
-}
-
-
-@media (max-width: 480px) {
-    h1 { font-size: 1.7rem; }
-    .circuito-card { padding: 15px; }
-    .circuito-card h2 { font-size: 1rem; }
-    .circuito-card p { font-size: 0.75rem; }
-    .circuito-card .difficulty { font-size: 0.7rem; }
-
-
-    nav {
-        gap: 8px;
-    }
-    nav a {
-        font-size: 0.65rem;
-    }
-
-
-    .btn {
-        width: 50%; 
-        max-width: 150px;
-        font-size: 0.9rem;
-        padding: 10px 18px;
-        text-align: center;
-      
-    }
-
-    .circuitos-container {
-        grid-template-columns: 1fr ;
-        gap: 10px;
-        padding: 5px;
-    }
-
-    .flame-icon {
-        width: 30px; 
-        height: 30px;
-        top: 5px;
-        right: 5px;
-    }
-}
-
-
-@media (orientation: portrait) {
-    body::before {
-        content: "⚠️ Por favor gira tu dispositivo para vista horizontal";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: #0d0d0d;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-size: 1.2rem;
-        z-index: 9999;
-    }
-    main.site,
-    header {
-        display: none;
-    }
-}
-</style>
-
 </html>
