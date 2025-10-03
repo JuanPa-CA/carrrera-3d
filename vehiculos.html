@@ -31,10 +31,10 @@
             <div class="vehiculos-container">
                 <div class="vehiculo-card">
                     <model-viewer src="XR7+Streak.glb"
-                                  alt="Vehículo XR-7 Streak"
-                                  auto-rotate
-                                  camera-controls
-                                  style="width: 100%; height: 200px;">
+                                    alt="Vehículo XR-7 Streak"
+                                    auto-rotate
+                                    camera-controls
+                                    style="width: 100%; height: 200px;">
                     </model-viewer>
                     <h2>XR-7 Streak</h2>
                     <div class="stats">
@@ -54,10 +54,10 @@
                 <div class="vehiculo-card">
                     <div class="flame-icon"></div>
                     <model-viewer src="Aero-Viper.glb"
-                                  alt="Vehículo Aero-Viper"
-                                  auto-rotate
-                                  camera-controls
-                                  style="width: 100%; height: 200px;">
+                                    alt="Vehículo Aero-Viper"
+                                    auto-rotate
+                                    camera-controls
+                                    style="width: 100%; height: 200px;">
                     </model-viewer>
                     <h2>Aero-Viper</h2>
                     <div class="stats">
@@ -76,10 +76,10 @@
 
                 <div class="vehiculo-card">
                     <model-viewer src="Neon+Drift.glb"
-                                  alt="Vehículo Neon-Drift"
-                                  auto-rotate
-                                  camera-controls
-                                  style="width: 100%; height: 200px;">
+                                    alt="Vehículo Neon-Drift"
+                                    auto-rotate
+                                    camera-controls
+                                    style="width: 100%; height: 200px;">
                     </model-viewer>
                     <h2>Neon Drift</h2>
                     <div class="stats">
@@ -99,10 +99,10 @@
                 <div class="vehiculo-card">
                     <div class="flame-icon"></div>
                     <model-viewer src="Thunderbolt+X.glb"
-                                  alt="Vehículo Thunderbolt X"
-                                  auto-rotate
-                                  camera-controls
-                                  style="width: 100%; height: 200px;">
+                                    alt="Vehículo Thunderbolt X"
+                                    auto-rotate
+                                    camera-controls
+                                    style="width: 100%; height: 200px;">
                     </model-viewer>
                     <h2>Thunderbolt X</h2>
                     <div class="stats">
@@ -122,10 +122,10 @@
                 <div class="vehiculo-card">
                     <div class="flame-icon"></div>
                     <model-viewer src="Cyber+Phantom.glb"
-                                  alt="Vehículo Cyber Phantom"
-                                  auto-rotate
-                                  camera-controls
-                                  style="width: 100%; height: 200px;">
+                                    alt="Vehículo Cyber Phantom"
+                                    auto-rotate
+                                    camera-controls
+                                    style="width: 100%; height: 200px;">
                     </model-viewer>
                     <h2>Cyber Phantom</h2>
                     <div class="stats">
@@ -144,10 +144,10 @@
 
                 <div class="vehiculo-card">
                     <model-viewer src="Solar+Blade.glb"
-                                  alt="Vehículo Solar Blade"
-                                  auto-rotate
-                                  camera-controls
-                                  style="width: 100%; height: 200px;">
+                                    alt="Vehículo Solar Blade"
+                                    auto-rotate
+                                    camera-controls
+                                    style="width: 100%; height: 200px;">
                     </model-viewer>
                     <h2>Solar Blade</h2>
                     <div class="stats">
@@ -194,19 +194,30 @@
     --white: #fff;
     /* Nueva variable para el color activo del slider */
     --primary-neon: #ff0; 
+    /* Variables para el fondo de cuadrícula */
+    --grid-color: rgba(0, 255, 255, 0.1);
+    --grid-size: 50px;
+    --grid-animation-speed: 60s;
 }
 
 body {
     font-family: 'Orbitron', sans-serif;
-    background: linear-gradient(135deg, #0a0a0f, #3f3f6d);
+    /* Fondo original, ahora con el fondo de cuadrícula neón */
+    background: var(--bg-dark);
     color: var(--white);
     margin: 0;
     padding: 0;
     animation: fadeIn 1s ease-in;
     
+    /* ESTILOS DE FONDO DE CUADRÍCULA NEÓN */
+    background-image: 
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(135deg, rgba(0, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 255, 255, 0.1) 75%, transparent 75%, transparent);
+    background-size: var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size);
+    /* Animación de desplazamiento */
+    animation: gridMovement var(--grid-animation-speed) linear infinite, fadeIn 1s ease-in;
 }
-
-
 
 /* Header fijo */
 header {
@@ -547,6 +558,12 @@ h1 {
 @keyframes pulse {
     0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--primary)); }
     50% { transform: scale(1.05); filter: drop-shadow(0 0 15px var(--primary)); }
+}
+
+/* Animación para el fondo de cuadrícula */
+@keyframes gridMovement {
+    0% { background-position: 0 0; }
+    100% { background-position: var(--grid-size) var(--grid-size); }
 }
 
 /* ================================
