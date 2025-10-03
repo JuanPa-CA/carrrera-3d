@@ -19,8 +19,7 @@
     <main class="site">
         <h1>Vehículos</h1>
 
-
-  <div class="slider-wrapper">
+        <div class="slider-wrapper">
 
             <input type="radio" name="slider" id="slide1" class="slider-radio" checked>
             <input type="radio" name="slider" id="slide2" class="slider-radio">
@@ -29,122 +28,152 @@
             <input type="radio" name="slider" id="slide5" class="slider-radio">
             <input type="radio" name="slider" id="slide6" class="slider-radio">
 
-
-        <div class="vehiculos-container">
-            <div class="vehiculo-card">
-                <model-viewer src="./model/XR7+Streak.glb"
-                              alt="Vehículo XR-7 Streak"
-                              auto-rotate
-                              camera-controls
-                              style="width: 100%; height: 200px;">
-                </model-viewer>
-                <h2>XR-7 Streak</h2>
-                <p>Velocidad: 9.2 | Acel: 8.4 | Manejo: 7.6</p>
-                <div class="btn-container">
-                    <button class="btn-settings" onclick="alert('Ajustes del XR-7 Streak')">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                    </button>
-                    <button class="btn-select" onclick="alert('XR-7 Streak Seleccionado')">Seleccionar</button>
+            <div class="vehiculos-container">
+                <div class="vehiculo-card">
+                    <model-viewer src="./model/XR7+Streak.glb"
+                                  alt="Vehículo XR-7 Streak"
+                                  auto-rotate
+                                  camera-controls
+                                  style="width: 100%; height: 200px;">
+                    </model-viewer>
+                    <h2>XR-7 Streak</h2>
+                    <div class="stats">
+                        <p>Velocidad: <span class="stars">⭐⭐⭐⭐⭐</span></p>
+                        <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
+                        <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
+                    </div>
+                    <p class="habilidad">**Habilidad:** **Rayo Turbo** - Otorga una ráfaga de velocidad instantánea. </p>
+                    <div class="btn-container">
+                        <button class="btn-settings" onclick="alert('Ajustes del XR-7 Streak')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </button>
+                        <button class="btn-select" onclick="alert('XR-7 Streak Seleccionado')">Seleccionar</button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="vehiculo-card">
-                 <div class="flame-icon"></div><model-viewer src="./model/Aero-Viper.glb"
-                              alt="Vehículo Aero-Viper"
-                              auto-rotate
-                              camera-controls
-                              style="width: 100%; height: 200px;">
-                </model-viewer>
-                <h2>Aero-Viper</h2>
-                <p>Velocidad: 8.8 | Acel: 9.0 | Manejo: 7.0</p>
-                <div class="btn-container">
-                    <button class="btn-settings" onclick="alert('Ajustes del Aero-Viper')">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                    </button>
-                    <button class="btn-select" onclick="alert('Aero-Viper Seleccionado')">Seleccionar</button>
+                <div class="vehiculo-card">
+                    <div class="flame-icon"></div>
+                    <model-viewer src="./model/Aero-Viper.glb"
+                                  alt="Vehículo Aero-Viper"
+                                  auto-rotate
+                                  camera-controls
+                                  style="width: 100%; height: 200px;">
+                    </model-viewer>
+                    <h2>Aero-Viper</h2>
+                    <div class="stats">
+                        <p>Velocidad: <span class="stars">⭐⭐⭐⭐</span></p>
+                        <p>Aceleración: <span class="stars">⭐⭐⭐⭐⭐</span></p>
+                        <p>Manejo: <span class="stars">⭐⭐⭐</span></p>
+                    </div>
+                    <p class="habilidad">**Habilidad:** **Salto Aéreo** - Permite saltar obstáculos temporalmente. </p>
+                    <div class="btn-container">
+                        <button class="btn-settings" onclick="alert('Ajustes del Aero-Viper')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </button>
+                        <button class="btn-select" onclick="alert('Aero-Viper Seleccionado')">Seleccionar</button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="vehiculo-card">
-                <model-viewer src="./model/Neon+Drift.glb"
-                
-                              alt="Vehículo Neon-Drift"
-                              auto-rotate
-                              camera-controls
-                              style="width: 100%; height: 200px;">
-                </model-viewer>
-                <h2>Neon Drift</h2>
-                <p>Velocidad: 8.0 | Acel: 7.2 | Manejo: 9.1</p>
-                <div class="btn-container">
-                    <button class="btn-settings" onclick="alert('Ajustes del Neon Drift')">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                    </button>
-                    <button class="btn-select" onclick="alert('Neon Drift Seleccionado')">Seleccionar</button>
+                <div class="vehiculo-card">
+                    <model-viewer src="./model/Neon+Drift.glb"
+                                  alt="Vehículo Neon-Drift"
+                                  auto-rotate
+                                  camera-controls
+                                  style="width: 100%; height: 200px;">
+                    </model-viewer>
+                    <h2>Neon Drift</h2>
+                    <div class="stats">
+                        <p>Velocidad: <span class="stars">⭐⭐⭐⭐</span></p>
+                        <p>Aceleración: <span class="stars">⭐⭐⭐</span></p>
+                        <p>Manejo: <span class="stars">⭐⭐⭐⭐⭐</span></p>
+                    </div>
+                    <p class="habilidad">**Habilidad:** **Derrape Ilimitado** - Llena el turbo un 50% más rápido al derrapar. </p>
+                    <div class="btn-container">
+                        <button class="btn-settings" onclick="alert('Ajustes del Neon Drift')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </button>
+                        <button class="btn-select" onclick="alert('Neon Drift Seleccionado')">Seleccionar</button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="vehiculo-card">
-                 <div class="flame-icon"></div><model-viewer src="./model/Thunderbolt+X.glb"
-                              alt="Vehículo Thunderbolt X"
-                              auto-rotate
-                              camera-controls
-                              style="width: 100%; height: 200px;">
-                </model-viewer>
-                <h2>Thunderbolt X</h2>
-                <p>Velocidad: 9.5 | Acel: 8.0 | Manejo: 8.2</p>
-                <div class="btn-container">
-                    <button class="btn-settings" onclick="alert('Ajustes del Thunderbolt X')">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                    </button>
-                    <button class="btn-select" onclick="alert('Thunderbolt X Seleccionado')">Seleccionar</button>
+                <div class="vehiculo-card">
+                    <div class="flame-icon"></div>
+                    <model-viewer src="./model/Thunderbolt+X.glb"
+                                  alt="Vehículo Thunderbolt X"
+                                  auto-rotate
+                                  camera-controls
+                                  style="width: 100%; height: 200px;">
+                    </model-viewer>
+                    <h2>Thunderbolt X</h2>
+                    <div class="stats">
+                        <p>Velocidad: <span class="stars">⭐⭐⭐⭐⭐</span></p>
+                        <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
+                        <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
+                    </div>
+                    <p class="habilidad">**Habilidad:** **Campo de Energía** - Crea un escudo temporal que anula un impacto. </p>
+                    <div class="btn-container">
+                        <button class="btn-settings" onclick="alert('Ajustes del Thunderbolt X')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </button>
+                        <button class="btn-select" onclick="alert('Thunderbolt X Seleccionado')">Seleccionar</button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="vehiculo-card">
-                 <div class="flame-icon"></div><model-viewer src="./model/Cyber+Phantom.glb"
-                              alt="Vehículo Cyber Phantom"
-                              auto-rotate
-                              camera-controls
-                              style="width: 100%; height: 200px;">
-                </model-viewer>
-                <h2>Cyber Phantom</h2>
-                <p>Velocidad: 8.3 | Acel: 8.7 | Manejo: 8.5</p>
-                <div class="btn-container">
-                    <button class="btn-settings" onclick="alert('Ajustes del Cyber Phantom')">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                    </button>
-                    <button class="btn-select" onclick="alert('Cyber Phantom Seleccionado')">Seleccionar</button>
+                <div class="vehiculo-card">
+                    <div class="flame-icon"></div>
+                    <model-viewer src="./model/Cyber+Phantom.glb"
+                                  alt="Vehículo Cyber Phantom"
+                                  auto-rotate
+                                  camera-controls
+                                  style="width: 100%; height: 200px;">
+                    </model-viewer>
+                    <h2>Cyber Phantom</h2>
+                    <div class="stats">
+                        <p>Velocidad: <span class="stars">⭐⭐⭐⭐</span></p>
+                        <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
+                        <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
+                    </div>
+                    <p class="habilidad">**Habilidad:** **Invisibilidad** - Se vuelve intangible para pasar a través de oponentes y trampas. </p>
+                    <div class="btn-container">
+                        <button class="btn-settings" onclick="alert('Ajustes del Cyber Phantom')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </button>
+                        <button class="btn-select" onclick="alert('Cyber Phantom Seleccionado')">Seleccionar</button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="vehiculo-card">
-                <model-viewer src="./model/Solar+Blade.glb"
-                              alt="Vehículo Solar Blade"
-                              auto-rotate
-                              camera-controls
-                              style="width: 100%; height: 200px;">
-                </model-viewer>
-                <h2>Solar Blade</h2>
-                <p>Velocidad: 9.0 | Acel: 7.8 | Manejo: 8.9</p>
-                <div class="btn-container">
-                    <button class="btn-settings" onclick="alert('Ajustes del Solar Blade')">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                    </button>
-                     <span>BLOQUEADO</span>
-                
+                <div class="vehiculo-card">
+                    <model-viewer src="./model/Solar+Blade.glb"
+                                  alt="Vehículo Solar Blade"
+                                  auto-rotate
+                                  camera-controls
+                                  style="width: 100%; height: 200px;">
+                    </model-viewer>
+                    <h2>Solar Blade</h2>
+                    <div class="stats">
+                        <p>Velocidad: <span class="stars">⭐⭐⭐⭐⭐</span></p>
+                        <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
+                        <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
+                    </div>
+                    <p class="habilidad">**Habilidad:** **Rastro Solar** - Deja una estela de luz que ralentiza a los oponentes. </p>
+                    <div class="btn-container">
+                        <button class="btn-settings" onclick="alert('Ajustes del Solar Blade')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </button>
+                        <span>BLOQUEADO</span>
+                    </div>
                 </div>
             </div>
         </div>
-  </div>
-       
-            <div class="slider-nav">
-                <label for="slide1" title=""></label>
-                <label for="slide2" title=""></label>
-                <label for="slide3" title=""></label>
-                <label for="slide4" title=""></label>
-                <label for="slide5" title=""></label>
-                <label for="slide6" title=""></label>
-            </div>
+        
+        <div class="slider-nav">
+            <label for="slide1" title=""></label>
+            <label for="slide2" title=""></label>
+            <label for="slide3" title=""></label>
+            <label for="slide4" title=""></label>
+            <label for="slide5" title=""></label>
+            <label for="slide6" title=""></label>
+        </div>
 
         <div class="nav-buttons">
             <a href="index.html" class="btn-nav atras">⬅ Atrás</a>
@@ -185,13 +214,10 @@ header {
     z-index: 1000;
 }
 
-
-
 .bloqueo-overlay span {
     font-size: 1.5rem;
     letter-spacing: 2px;
 }
-
 
 nav {
     display: flex;
@@ -235,15 +261,15 @@ h1 {
     text-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
     animation: glowText 2s infinite alternate;
     margin-bottom: 30px;
-
 }
 
 /* =========================================================
-   ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
+    ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
 ========================================================= */
 
 .slider-wrapper {
     position: relative;
+    /* Ancho de la tarjeta más el margen (350px + 45px = 395px, aunque el contenido visible es 350px) */
     width: 350px; 
     height: auto;
     margin: 40px auto; 
@@ -254,10 +280,12 @@ h1 {
 }
 
 .vehiculos-container {
+    /* Ancho total: 6 tarjetas * 395px de desplazamiento = 2370px, usando el desplazamiento como referencia*/
     display: flex;
-    width: calc(6 * 350px);
+    width: 2370px; 
     padding: 0;
-    gap: 0;
+    /* Ajuste el gap para que el desplazamiento (395px) mueva la siguiente tarjeta correctamente */
+    gap: 45px; 
     transition: transform 0.5s ease-in-out;
     grid-template-columns: none !important;
     max-width: none !important;
@@ -265,6 +293,7 @@ h1 {
 }
 
 .vehiculo-card {
+    /* Ancho de la tarjeta fijo */
     flex: 0 0 350px; 
     width: 350px; 
     padding: 20px;
@@ -285,20 +314,19 @@ h1 {
     box-shadow: 0 0 20px rgba(0, 183, 255, 0.3);
 }
 
-/* Slider movement */
- #slide1:checked ~ .vehiculos-container { transform: translateX(0); }
-    #slide2:checked ~ .vehiculos-container { transform: translateX(-395px); } /* 1 x 350px */
-    #slide3:checked ~ .vehiculos-container { transform: translateX(-780px); } /* 2 x 350px */
-    #slide4:checked ~ .vehiculos-container { transform: translateX(-1170px); } /* 3 x 350px */
-    #slide5:checked ~ .vehiculos-container { transform: translateX(-1560px); } /* 4 x 350px */
-    #slide6:checked ~ .vehiculos-container { transform: translateX(-1950px); }
+/* Slider movement - Valores de desplazamiento conservados */
+#slide1:checked ~ .vehiculos-container { transform: translateX(-20px); }
+#slide2:checked ~ .vehiculos-container { transform: translateX(-455px); } 
+#slide3:checked ~ .vehiculos-container { transform: translateX(-890px); } 
+#slide4:checked ~ .vehiculos-container { transform: translateX(-1325px); } 
+#slide5:checked ~ .vehiculos-container { transform: translateX(-1760px); } 
+#slide6:checked ~ .vehiculos-container { transform: translateX(-2195px); }
 
 /* Slider nav */
 .slider-nav {
     position: relative;
     text-align: center;
     z-index: 20;
- 
 }
 
 .slider-nav label {
@@ -353,19 +381,46 @@ h1 {
     font-size: 1.2rem;
     margin-bottom: 8px;
     color: #0ff;
-    margin-left: -50px;
+    margin-left: -10px;
 }
 
-.vehiculo-card p {
+/* Nuevos estilos para las estadísticas con estrellas y habilidad */
+.stats {
+    margin-bottom: 15px;
+}
+
+.vehiculo-card .stats p {
     font-family: 'Inter', sans-serif;
     font-size: 0.95rem;
     color: #ccc;
-    margin-left: -40px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-
- 
+    margin-left: 0; /* Centrar el texto */
+    padding: 2px 0;
+    display: flex;
+    justify-content: space-between;
+    max-width: 200px;
+    margin: 0 auto;
 }
+
+.vehiculo-card .stats .stars {
+    color: var(--secondary); /* Color amarillo neón para las estrellas */
+    font-size: 1.1em;
+    text-shadow: 0 0 5px var(--secondary);
+    letter-spacing: 1px;
+}
+
+.habilidad {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--primary);
+    border: 1px solid rgba(0, 255, 255, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 15px auto;
+    max-width: 90%;
+    background: rgba(0, 255, 255, 0.05);
+}
+/* Fin de nuevos estilos para las estadísticas con estrellas y habilidad */
+
 
 /* Botones */
 .nav-buttons {
@@ -377,11 +432,10 @@ h1 {
 
 .btn-container {
     display: flex;
-  
+    justify-content: center;
     align-items: center;
     gap: 50px;
     margin-top: 10px;
-   
 }
 
 .btn-select {
@@ -416,7 +470,6 @@ h1 {
     align-items: center;
     width: 40px;
     height: 40px;
-  
 }
 
 .btn-settings:hover {
@@ -498,14 +551,15 @@ h1 {
 @media (max-width: 1024px) {
     h1 { font-size: 2.5rem; }
     .vehiculo-card h2 { font-size: 1rem; }
-    .vehiculo-card p { font-size: 0.85rem; }
+    .vehiculo-card .stats p { font-size: 0.85rem; } /* Ajuste de fuente para stats */
+    .habilidad { font-size: 0.8rem; }
     .nav-buttons { max-width: 300px; margin: 30px auto 0; }
 }
 
 /* Móviles (<= 768px) */
 @media (max-width: 768px) {
     h1 { font-size: 2rem; }
-      nav { gap: 20px; padding: 10px 15px; }
+    nav { gap: 20px; padding: 10px 15px; }
     nav a { font-size: 0.85rem; letter-spacing: 1px; }
 
     /* Ajuste de botones de navegación principal */
@@ -534,7 +588,6 @@ h1 {
 /* Teléfonos pequeños (<= 480px) */
 
 @media (max-width: 375px) {
-
     h1 { font-size: 1.2rem; }
 }
 </style>
