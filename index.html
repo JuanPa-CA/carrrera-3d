@@ -89,20 +89,23 @@
       margin:0 auto;
       padding:140px 20px;
       min-height:calc(100vh - 160px);
+      margin-top: 0px;
     }
     h1 {
       font-family:'Orbitron',sans-serif;
-      font-size:4.5rem;
+      font-size:7rem;
       margin:10px 0 50px;
       color:var(--primary);
       text-shadow:0 0 10px var(--primary),0 0 25px var(--secondary);
       animation:glow 2s infinite alternate;
+      margin-bottom: 120px;
     }
     p {
       font-size:1.1rem;
       max-width:700px;
       margin:0 auto 40px;
       line-height:1.6;
+      margin-bottom: 100px;
     }
     .btn {
       margin:12px 8px;
@@ -187,34 +190,6 @@
       to   { text-shadow:0 0 20px var(--secondary),0 0 40px var(--accent); }
     }
 
-    /* Responsive */
-    @media (max-width:768px) {
-      footer { display:none; }
-      body   { padding-bottom:0; }
-      h1     { font-size:2.8rem; }
-      nav    { gap:30px; }
-    }
-
-    /* Orientación móvil (forzar horizontal) */
-    @media (orientation:portrait) and (max-width:768px) {
-      main.site, header, footer { display:none; }
-      body::before {
-        content:"⚠️ Por favor, gira tu dispositivo para una mejor experiencia (vista horizontal)";
-        position:fixed;
-        inset:0;
-        background:var(--bg-dark);
-        color:var(--primary);
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        text-align:center;
-        font-size:1.2rem;
-        padding:20px;
-        z-index:9999;
-        font-family:'Orbitron',sans-serif;
-        text-shadow:0 0 5px rgba(0,255,255,0.5);
-      }
-    }
   </style>
 </head>
 <body>
@@ -271,4 +246,6 @@
 
 </body>
 </html>
+
+
 
