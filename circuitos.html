@@ -296,6 +296,24 @@
         .slider-radio {
             display: none;
         }
+
+                .locked-select {
+            background: #333;
+            color: var(--muted);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            pointer-events: auto;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            padding: 10px 10px 10px 10px;
+            border-radius: 6px;
+            margin-right: 40px;
+        }
+
+        .locked-select:hover {
+            transform: none;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+        }
         
         /* Icono de fuego (Para pistas desafiantes) */
         .flame-icon {
@@ -516,7 +534,8 @@
                             <p>Pistas flotantes en gravedad cero con cambios de plano. Requiere extrema precisión en los giros y derrapes.</p>
                             <div class="card-actions-wrapper">
                                 <span class="difficulty">Alta</span>
-                                <button class="btn-select" disabled>BLOQUEADO</button>
+                                <button class="locked-select"
+                                onclick="alert('¡Circuito Bloqueado! Desbloquea los demás circuitos para seleccionarlo.')">BLOQUEADO</button>
                             </div>
                         </div>
                     </div>
