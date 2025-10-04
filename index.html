@@ -187,6 +187,13 @@
       to   { text-shadow:0 0 20px var(--secondary),0 0 40px var(--accent); }
     }
 
+    /* Responsive */
+    @media (max-width:768px) {
+      footer { display:none; }
+      body   { padding-bottom:0; }
+      h1     { font-size:2.8rem; }
+      nav    { gap:30px; }
+    }
 
     /* Orientación móvil (forzar horizontal) */
     @media (orientation:portrait) and (max-width:768px) {
@@ -242,9 +249,9 @@
     </div>
     <div class="footer-center">
       <nav class="footer-nav">
-        <a href="/terms.html">Términos</a>
-        <a href="/privacy.html">Privacidad</a>
-        <a href="/contacto.html">Contacto</a>
+        <a href="legal.html#terminos">Términos</a>
+        <a href="legal.html#privacidad">Privacidad</a>
+        <a href="legal.html#contacto">Contacto</a>
       </nav>
     </div>
     <div class="footer-right">
@@ -264,4 +271,3 @@
 
 </body>
 </html>
-
