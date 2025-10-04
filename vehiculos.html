@@ -1,12 +1,485 @@
 <!doctype html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Vehículos - Neon Rush</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+        /* ================================
+Vehículos - Estilo Futurista Animado
+================================ */
+        :root {
+            --primary: #0ff;
+            --secondary: #ff0;
+            --bg-dark: #0a0a0f;
+            --muted: #bbb;
+            --white: #fff;
+            /* Nueva variable para el color activo del slider */
+            --primary-neon: #ff0;
+            /* Variables para el fondo de cuadrícula */
+            --grid-color: rgba(0, 255, 255, 0.1);
+            --grid-size: 50px;
+            --grid-animation-speed: 60s;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            /* Fondo original, ahora con el fondo de cuadrícula neón */
+            background: var(--bg-dark);
+            color: var(--white);
+            margin: 0;
+            padding: 0;
+            animation: fadeIn 1s ease-in;
+
+            /* ESTILOS DE FONDO DE CUADRÍCULA NEÓN */
+            background-image:
+                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(135deg, rgba(0, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 255, 255, 0.1) 75%, transparent 75%, transparent);
+            background-size: var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size);
+            /* Animación de desplazamiento */
+            animation: gridMovement var(--grid-animation-speed) linear infinite, fadeIn 1s ease-in;
+        }
+
+        /* Header fijo */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .bloqueo-overlay span {
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            background: rgba(10, 10, 15, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 15px 20px;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        nav a {
+            text-decoration: none;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--white);
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+        }
+
+        /* Contenido principal */
+        main.site {
+            padding: 180px 20px 40px;
+            /* margen para header */
+            max-width: 1200px;
+            margin: auto;
+            animation: slideUp 1s ease-out;
+        }
+
+        /* Título */
+        h1 {
+            text-align: center;
+            font-size: 3.5rem;
+            color: var(--primary);
+            text-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
+            animation: glowText 2s infinite alternate;
+            margin-bottom: 30px;
+            margin-top: -95px;
+        }
+
+        /* =========================================================
+ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
+========================================================= */
+
+        .slider-wrapper {
+            position: relative;
+            /* Aumentamos el ancho para acomodar el diseño de dos columnas (ej. 700px) */
+            width: 700px;
+            height: auto;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+            background: rgba(10, 0, 25, 0.7);
+        }
+
+        .vehiculos-container {
+            /* Ancho total: 6 tarjetas * (700px ancho + 45px gap) = 4470px, usando el desplazamiento como referencia*/
+            display: flex;
+            width: 4470px;
+            padding: 0;
+            /* Ajuste el gap */
+            gap: 45px;
+            transition: transform 0.5s ease-in-out;
+            grid-template-columns: none !important;
+            max-width: none !important;
+            margin: 0;
+        }
+
+        .vehiculo-card {
+            flex: 0 0 700px;
+            width: 700px;
+            padding: 20px;
+            margin: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 20px rgba(0, 204, 255, 0.3);
+            transition: none;
+            animation: none;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            min-height: 400px;
+        }
+
+        .vehiculo-info {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        .vehiculo-card:hover {
+            transform: none;
+            box-shadow: 0 0 20px rgba(0, 183, 255, 0.3);
+        }
+
+        #slide1:checked~.vehiculos-container {
+            transform: translateX(calc(0px - 20px));
+        }
+
+        #slide2:checked~.vehiculos-container {
+            transform: translateX(calc(0px - 785px - 20px));
+        }
+
+        #slide3:checked~.vehiculos-container {
+            transform: translateX(calc(0px - 1570px - 20px));
+        }
+
+        #slide4:checked~.vehiculos-container {
+            transform: translateX(calc(0px - 2355px - 20px));
+        }
+
+        #slide5:checked~.vehiculos-container {
+            transform: translateX(calc(0px - 3140px - 20px));
+        }
+
+        #slide6:checked~.vehiculos-container {
+            transform: translateX(calc(0px - 3925px - 20px));
+        }
+
+
+        /* Slider nav */
+        .slider-nav {
+            position: relative;
+            text-align: center;
+            z-index: 20;
+        }
+
+        .slider-nav label {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: background 0.3s, box-shadow 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .slider-nav label:hover {
+            background: var(--primary-neon);
+            box-shadow: 0 0 10px var(--primary-neon);
+        }
+
+        .slider-radio:checked~.slider-nav label {
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: none;
+        }
+
+        #slide1:checked~.slider-nav label:nth-child(1),
+        #slide2:checked~.slider-nav label:nth-child(2),
+        #slide3:checked~.slider-nav label:nth-child(3),
+        #slide4:checked~.slider-nav label:nth-child(4),
+        #slide5:checked~.slider-nav label:nth-child(5),
+        #slide6:checked~.slider-nav label:nth-child(6) {
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .slider-radio {
+            display: none;
+        }
+
+        /* Vehículo contenido */
+        .vehiculo-card model-viewer {
+            /* Ocupa la mitad izquierda */
+            width: 50%;
+            max-width: 350px;
+            height: 350px;
+            /* Aumentar la altura para el modelo 3D */
+            margin: 0;
+            display: block;
+            animation: pulse 3s infinite;
+            padding-right: 0;
+            /* Eliminar padding innecesario */
+        }
+
+        .vehiculo-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            /* Aumentar tamaño de fuente */
+            margin-bottom: 8px;
+            color: #0ff;
+            margin-left: 0;
+            /* Quitar margen que desplazaba el texto */
+        }
+
+        /* Nuevos estilos para las estadísticas con estrellas y habilidad */
+        .stats {
+            margin-bottom: 15px;
+        }
+
+        .vehiculo-card .stats p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #ccc;
+            padding: 2px 0;
+            display: flex;
+            justify-content: space-between;
+            max-width: 300px;
+            margin: 0;
+        }
+
+        .vehiculo-card .stats .stars {
+            color: var(--secondary);
+            /* Color amarillo neón para las estrellas */
+            font-size: 1.1em;
+            text-shadow: 0 0 5px var(--secondary);
+            letter-spacing: 1px;
+        }
+
+        .habilidad {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--primary);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 15px 0 30px 0;
+            max-width: 90%;
+            background: rgba(0, 255, 255, 0.05);
+        }
+
+        /* Fin de nuevos estilos para las estadísticas con estrellas y habilidad */
+        .locked-select {
+            background: #333;
+            color: var(--muted);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            pointer-events: auto;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            padding: 10px 10px 10px 10px;
+            border-radius: 6px;
+            margin-left: 95px;
+        }
+
+        .locked-select:hover {
+            transform: none;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+        }
+
+        /* Botones */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            max-width: 400px;
+            margin: 40px auto 0;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .btn-select {
+            padding: 10px 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            border: none;
+            border-radius: 15px;
+            background: var(--primary);
+            color: #000;
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-left: 95px;
+        }
+
+        .btn-select:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--primary), 0 0 50px var(--primary);
+        }
+
+        .btn-settings {
+            padding: 8px;
+            font-size: 0;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .btn-settings:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(60deg) scale(1.1);
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .btn-settings svg {
+            color: var(--primary);
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+        }
+
+        .btn-nav {
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #000;
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-nav:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--primary), 0 0 50px var(--primary);
+        }
+
+        /* Icono de fuego */
+        .flame-icon {
+            position: absolute;
+            top: 10px;
+            left: 25px;
+            width: 35px;
+            height: 35px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FF4500"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.4-.76-3.8-2.67-4.2-4.13-.5-1.9 0-3.92 1.5-5.4 1.58-1.58 3.5-1.9 5.2-.87 1.7.9 2.5 2.5 2 4.1-.3 1.2-1.3 2.5-2.5 3.1-.9.5-2 .7-3 .2z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 0 5px orange);
+            animation: flamePulse 1s infinite alternate;
+            z-index: 10;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes glowText {
+            from {
+                text-shadow: 0 0 10px var(--primary);
+            }
+
+            to {
+                text-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary);
+            }
+        }
+
+        @keyframes fadeInCard {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 5px var(--primary));
+            }
+
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 15px var(--primary));
+            }
+        }
+
+        /* Animación para el fondo de cuadrícula */
+        @keyframes gridMovement {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: var(--grid-size) var(--grid-size);
+            }
+        }
+    </style>
 </head>
+
 <body>
     <header>
         <nav>
@@ -29,150 +502,199 @@
             <input type="radio" name="slider" id="slide6" class="slider-radio">
 
             <div class="vehiculos-container">
+
                 <div class="vehiculo-card">
-                    <model-viewer src="XR7+Streak.glb"
-                                    alt="Vehículo XR-7 Streak"
-                                    auto-rotate
-                                    camera-controls
-                                    style="width: 100%; height: 200px;">
+                    <model-viewer src="XR7+Streak.glb" alt="Vehículo XR-7 Streak" auto-rotate camera-controls
+                        style="width: 50%; height: 350px;">
                     </model-viewer>
-                    <h2>XR-7 Streak</h2>
-                    <div class="stats">
-                        <p>Velocidad: <span class="stars">⭐⭐⭐⭐⭐</span></p>
-                        <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
-                        <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
-                    </div>
-                    <p class="habilidad">Habilidad: Rayo Turbo - Otorga una ráfaga de velocidad instantánea. </p>
-                    <div class="btn-container">
-                        <button class="btn-settings" onclick="alert('Ajustes del XR-7 Streak')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                        </button>
-                        <button class="btn-select" onclick="alert('XR-7 Streak Seleccionado')">Seleccionar</button>
+                    <div class="vehiculo-info">
+                        <h2>XR-7 Streak</h2>
+                        <div class="stats">
+                            <p>Velocidad: <span class="stars">⭐⭐⭐⭐⭐</span></p>
+                            <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
+                            <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
+                        </div>
+                        <p class="habilidad">Habilidad: Rayo Turbo - Otorga una ráfaga de velocidad instantánea. </p>
+                        <div class="btn-container">
+                            <button class="btn-settings" onclick="alert('Ajustes del XR-7 Streak')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-settings">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path
+                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                    </path>
+                                </svg>
+                            </button>
+                            <button class="btn-select" onclick="alert('XR-7 Streak Seleccionado')">Seleccionar</button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="vehiculo-card">
                     <div class="flame-icon"></div>
-                    <model-viewer src="Aero-Viper.glb"
-                                    alt="Vehículo Aero-Viper"
-                                    auto-rotate
-                                    camera-controls
-                                    style="width: 100%; height: 200px;">
+                    <model-viewer src="Aero-Viper.glb" alt="Vehículo Aero-Viper" auto-rotate camera-controls
+                        style="width: 50%; height: 350px;">
                     </model-viewer>
-                    <h2>Aero-Viper</h2>
-                    <div class="stats">
-                        <p>Velocidad: <span class="stars">⭐⭐⭐⭐</span></p>
-                        <p>Aceleración: <span class="stars">⭐⭐⭐⭐⭐</span></p>
-                        <p>Manejo: <span class="stars">⭐⭐⭐</span></p>
-                    </div>
-                    <p class="habilidad">Habilidad: Salto Aéreo - Permite saltar obstáculos temporalmente. </p>
-                    <div class="btn-container">
-                        <button class="btn-settings" onclick="alert('Ajustes del Aero-Viper')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                        </button>
-                        <button class="btn-select" onclick="alert('Aero-Viper Seleccionado')">Seleccionar</button>
+                    <div class="vehiculo-info">
+                        <h2>Aero-Viper</h2>
+                        <div class="stats">
+                            <p>Velocidad: <span class="stars">⭐⭐⭐⭐</span></p>
+                            <p>Aceleración: <span class="stars">⭐⭐⭐⭐⭐</span></p>
+                            <p>Manejo: <span class="stars">⭐⭐⭐</span></p>
+                        </div>
+                        <p class="habilidad">Habilidad: Salto Aéreo - Permite saltar obstáculos temporalmente. </p>
+                        <div class="btn-container">
+                            <button class="btn-settings" onclick="alert('Ajustes del Aero-Viper')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-settings">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path
+                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                    </path>
+                                </svg>
+                            </button>
+                            <button class="btn-select" onclick="alert('Aero-Viper Seleccionado')">Seleccionar</button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="vehiculo-card">
-                    <model-viewer src="Neon+Drift.glb"
-                                    alt="Vehículo Neon-Drift"
-                                    auto-rotate
-                                    camera-controls
-                                    style="width: 100%; height: 200px;">
+                    <model-viewer src="Neon+Drift.glb" alt="Vehículo Neon-Drift" auto-rotate camera-controls
+                        style="width: 50%; height: 350px;">
                     </model-viewer>
-                    <h2>Neon Drift</h2>
-                    <div class="stats">
-                        <p>Velocidad: <span class="stars">⭐⭐⭐⭐</span></p>
-                        <p>Aceleración: <span class="stars">⭐⭐⭐</span></p>
-                        <p>Manejo: <span class="stars">⭐⭐⭐⭐⭐</span></p>
-                    </div>
-                    <p class="habilidad">Habilidad: Derrape Ilimitado - Llena el turbo un 50% más rápido al derrapar. </p>
-                    <div class="btn-container">
-                        <button class="btn-settings" onclick="alert('Ajustes del Neon Drift')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                        </button>
-                        <button class="btn-select" onclick="alert('Neon Drift Seleccionado')">Seleccionar</button>
-                    </div>
-                </div>
-
-                <div class="vehiculo-card">
-                    <div class="flame-icon"></div>
-                    <model-viewer src="Thunderbolt+X.glb"
-                                    alt="Vehículo Thunderbolt X"
-                                    auto-rotate
-                                    camera-controls
-                                    style="width: 100%; height: 200px;">
-                    </model-viewer>
-                    <h2>Thunderbolt X</h2>
-                    <div class="stats">
-                        <p>Velocidad: <span class="stars">⭐⭐⭐⭐⭐</span></p>
-                        <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
-                        <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
-                    </div>
-                    <p class="habilidad">Habilidad: Campo de Energía - Crea un escudo temporal que anula un impacto. </p>
-                    <div class="btn-container">
-                        <button class="btn-settings" onclick="alert('Ajustes del Thunderbolt X')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                        </button>
-                        <button class="btn-select" onclick="alert('Thunderbolt X Seleccionado')">Seleccionar</button>
+                    <div class="vehiculo-info">
+                        <h2>Neon Drift</h2>
+                        <div class="stats">
+                            <p>Velocidad: <span class="stars">⭐⭐⭐⭐</span></p>
+                            <p>Aceleración: <span class="stars">⭐⭐⭐</span></p>
+                            <p>Manejo: <span class="stars">⭐⭐⭐⭐⭐</span></p>
+                        </div>
+                        <p class="habilidad">Habilidad: Derrape Ilimitado - Llena el turbo un 50% más rápido al
+                            derrapar. </p>
+                        <div class="btn-container">
+                            <button class="btn-settings" onclick="alert('Ajustes del Neon Drift')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-settings">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path
+                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                    </path>
+                                </svg>
+                            </button>
+                            <button class="btn-select" onclick="alert('Neon Drift Seleccionado')">Seleccionar</button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="vehiculo-card">
                     <div class="flame-icon"></div>
-                    <model-viewer src="Cyber+Phantom.glb"
-                                    alt="Vehículo Cyber Phantom"
-                                    auto-rotate
-                                    camera-controls
-                                    style="width: 100%; height: 200px;">
+                    <model-viewer src="Thunderbolt+X.glb" alt="Vehículo Thunderbolt X" auto-rotate camera-controls
+                        style="width: 50%; height: 350px;">
                     </model-viewer>
-                    <h2>Cyber Phantom</h2>
-                    <div class="stats">
-                        <p>Velocidad: <span class="stars">⭐⭐⭐⭐</span></p>
-                        <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
-                        <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
-                    </div>
-                    <p class="habilidad">Habilidad: Invisibilidad - Se vuelve intangible para pasar a través de oponentes y trampas. </p>
-                    <div class="btn-container">
-                        <button class="btn-settings" onclick="alert('Ajustes del Cyber Phantom')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                        </button>
-                        <button class="btn-select" onclick="alert('Cyber Phantom Seleccionado')">Seleccionar</button>
+                    <div class="vehiculo-info">
+                        <h2>Thunderbolt X</h2>
+                        <div class="stats">
+                            <p>Velocidad: <span class="stars">⭐⭐⭐⭐⭐</span></p>
+                            <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
+                            <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
+                        </div>
+                        <p class="habilidad">Habilidad: Campo de Energía - Crea un escudo temporal que anula un impacto.
+                        </p>
+                        <div class="btn-container">
+                            <button class="btn-settings" onclick="alert('Ajustes del Thunderbolt X')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-settings">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path
+                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                    </path>
+                                </svg>
+                            </button>
+                            <button class="btn-select"
+                                onclick="alert('Thunderbolt X Seleccionado')">Seleccionar</button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="vehiculo-card">
-                    <model-viewer src="Solar+Blade.glb"
-                                    alt="Vehículo Solar Blade"
-                                    auto-rotate
-                                    camera-controls
-                                    style="width: 100%; height: 200px;">
+                    <div class="flame-icon"></div>
+                    <model-viewer src="Cyber+Phantom.glb" alt="Vehículo Cyber Phantom" auto-rotate camera-controls
+                        style="width: 50%; height: 350px;">
                     </model-viewer>
-                    <h2>Solar Blade</h2>
-                    <div class="stats">
-                        <p>Velocidad: <span class="stars">⭐⭐⭐⭐⭐</span></p>
-                        <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
-                        <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
+                    <div class="vehiculo-info">
+                        <h2>Cyber Phantom </h2>
+                        <div class="stats">
+                            <p>Velocidad: <span class="stars">⭐⭐⭐⭐</span></p>
+                            <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
+                            <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
+                        </div>
+                        <p class="habilidad">Habilidad: Invisibilidad - Se vuelve intangible para pasar a través de
+                            oponentes y trampas. </p>
+                        <div class="btn-container">
+                            <button class="btn-settings" onclick="alert('Ajustes del Cyber Phantom')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-settings">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path
+                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                    </path>
+                                </svg>
+                            </button>
+                            <button class="btn-select"
+                                onclick="alert('Cyber Phantom Seleccionado')">Seleccionar</button>
+                        </div>
                     </div>
-                    <p class="habilidad">Habilidad: Rastro Solar - Deja una estela de luz que ralentiza a los oponentes. </p>
-                    <div class="btn-container">
-                        <button class="btn-settings" onclick="alert('Ajustes del Solar Blade')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                        </button>
-                        <span>BLOQUEADO</span>
+                </div>
+
+                <div class="vehiculo-card">
+                    <div class="flame-icon"></div>
+                    <model-viewer src="Solar+Blade.glb" alt="Vehículo Solar Blade" auto-rotate camera-controls
+                        style="width: 50%; height: 350px;">
+                    </model-viewer>
+                    <div class="vehiculo-info">
+                        <h2>Solar Blade</h2>
+                        <div class="stats">
+                            <p>Velocidad: <span class="stars">⭐⭐⭐⭐⭐</span></p>
+                            <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
+                            <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
+                        </div>
+                        <p class="habilidad">Habilidad: Rastro Solar - Deja una estela de luz que ralentiza a los
+                            oponentes. </p>
+                        <div class="btn-container">
+                            <button class="btn-settings" onclick="alert('Ajustes del Solar Blade')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-settings">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path
+                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1.51 1H19a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                    </path>
+                                </svg>
+                            </button>
+                             <button class="locked-select"
+                                onclick="alert('¡Vehículo Bloqueado! Desbloquea los demás vehiculos para seleccionarlo.')">BLOQUEADO</button>
+                        </div>
+                    </div>
+                </div>
+
+                
                     </div>
                 </div>
             </div>
         </div>
-        
+            
         <div class="slider-nav">
-            <label for="slide1" title=""></label>
-            <label for="slide2" title=""></label>
-            <label for="slide3" title=""></label>
-            <label for="slide4" title=""></label>
-            <label for="slide5" title=""></label>
-            <label for="slide6" title=""></label>
+            <label for="slide1" title="XR-7 Streak"></label>
+            <label for="slide2" title="Aero-Viper"></label>
+            <label for="slide3" title="Neon Drift"></label>
+            <label for="slide4" title="Thunderbolt X"></label>
+            <label for="slide5" title="Cyber Phantom"></label>
+            <label for="slide6" title="Quantum Rider"></label>
         </div>
 
         <div class="nav-buttons">
@@ -182,437 +704,4 @@
     </main>
 </body>
 
-<style>
-/* ================================
-    Vehículos - Estilo Futurista Animado
-================================ */
-:root {
-    --primary: #0ff;
-    --secondary: #ff0;
-    --bg-dark: #0a0a0f;
-    --muted: #bbb;
-    --white: #fff;
-    /* Nueva variable para el color activo del slider */
-    --primary-neon: #ff0; 
-    /* Variables para el fondo de cuadrícula */
-    --grid-color: rgba(0, 255, 255, 0.1);
-    --grid-size: 50px;
-    --grid-animation-speed: 60s;
-}
-
-body {
-    font-family: 'Orbitron', sans-serif;
-    /* Fondo original, ahora con el fondo de cuadrícula neón */
-    background: var(--bg-dark);
-    color: var(--white);
-    margin: 0;
-    padding: 0;
-    animation: fadeIn 1s ease-in;
-    
-    /* ESTILOS DE FONDO DE CUADRÍCULA NEÓN */
-    background-image: 
-        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px),
-        linear-gradient(135deg, rgba(0, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 255, 255, 0.1) 75%, transparent 75%, transparent);
-    background-size: var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size);
-    /* Animación de desplazamiento */
-    animation: gridMovement var(--grid-animation-speed) linear infinite, fadeIn 1s ease-in;
-}
-
-/* Header fijo */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-.bloqueo-overlay span {
-    font-size: 1.5rem;
-    letter-spacing: 2px;
-}
-
-nav {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    background: rgba(10, 10, 15, 0.6);
-    backdrop-filter: blur(8px);
-    padding: 15px 20px;
-    border-bottom: 2px solid rgba(0,255,255,0.2);
-    box-shadow: 0 0 15px rgba(0,255,255,0.3);
-}
-
-nav a {
-    text-decoration: none;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--white);
-    transition: color 0.3s, text-shadow 0.3s;
-}
-
-nav a:hover,
-nav a.active {
-    color: var(--primary);
-    text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
-}
-
-/* Contenido principal */
-main.site {
-    padding: 180px 20px 40px; /* margen para header */
-    max-width: 1200px;
-    margin: auto;
-    animation: slideUp 1s ease-out;
-}
-
-/* Título */
-h1 {
-    text-align: center;
-    font-size: 3.5rem;
-    color: var(--primary);
-    text-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
-    animation: glowText 2s infinite alternate;
-    margin-bottom: 30px;
-    margin-top: -40px;
-}
-
-/* =========================================================
-    ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
-========================================================= */
-
-.slider-wrapper {
-    position: relative;
-    /* Ancho de la tarjeta más el margen (350px + 45px = 395px, aunque el contenido visible es 350px) */
-    width: 350px; 
-    height: auto;
-    margin: 40px auto; 
-    overflow: hidden; 
-    border-radius: 15px;
-    box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
-    background: rgba(10, 0, 25, 0.7);
-}
-
-.vehiculos-container {
-    /* Ancho total: 6 tarjetas * 395px de desplazamiento = 2370px, usando el desplazamiento como referencia*/
-    display: flex;
-    width: 2370px; 
-    padding: 0;
-    /* Ajuste el gap para que el desplazamiento (395px) mueva la siguiente tarjeta correctamente */
-    gap: 45px; 
-    transition: transform 0.5s ease-in-out;
-    grid-template-columns: none !important;
-    max-width: none !important;
-    margin: 0;
-}
-
-.vehiculo-card {
-    /* Ancho de la tarjeta fijo */
-    flex: 0 0 350px; 
-    width: 350px; 
-    padding: 20px;
-    margin: 0; 
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 20px rgba(0, 204, 255, 0.3);
-    transition: none;
-    animation: none;
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-}
-
-.vehiculo-card:hover {
-    transform: none; 
-    box-shadow: 0 0 20px rgba(0, 183, 255, 0.3);
-}
-
-/* Slider movement - Valores de desplazamiento conservados */
-#slide1:checked ~ .vehiculos-container { transform: translateX(-20px); }
-#slide2:checked ~ .vehiculos-container { transform: translateX(-455px); } 
-#slide3:checked ~ .vehiculos-container { transform: translateX(-890px); } 
-#slide4:checked ~ .vehiculos-container { transform: translateX(-1325px); } 
-#slide5:checked ~ .vehiculos-container { transform: translateX(-1760px); } 
-#slide6:checked ~ .vehiculos-container { transform: translateX(-2195px); }
-
-/* Slider nav */
-.slider-nav {
-    position: relative;
-    text-align: center;
-    z-index: 20;
-}
-
-.slider-nav label {
-    display:inline-block;
-    width: 15px;
-    height: 15px;
-    margin: 0 5px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    cursor: pointer;
-    transition: background 0.3s, box-shadow 0.3s;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.slider-nav label:hover {
-    background: var(--primary-neon);
-    box-shadow: 0 0 10px var(--primary-neon);
-}
-
-.slider-radio:checked ~ .slider-nav label { 
-    background: rgba(255, 255, 255, 0.4); 
-    box-shadow: none; 
-}
-
-#slide1:checked ~ .slider-nav label:nth-child(1),
-#slide2:checked ~ .slider-nav label:nth-child(2),
-#slide3:checked ~ .slider-nav label:nth-child(3),
-#slide4:checked ~ .slider-nav label:nth-child(4),
-#slide5:checked ~ .slider-nav label:nth-child(5),
-#slide6:checked ~ .slider-nav label:nth-child(6) {
-    background: var(--primary);
-    box-shadow: 0 0 10px var(--primary);
-}
-
-.slider-radio {
-    display: none;
-}
-
-/* Vehículo contenido */
-.vehiculo-card model-viewer {
-    width: 100%;
-    max-width: 200px;
-    height: 180px;
-    margin: 0 auto 15px;
-    display: block;
-    animation: pulse 3s infinite;
-    padding-right: 20px;
-}
-
-.vehiculo-card h2 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-    color: #0ff;
-    margin-left: -10px;
-}
-
-/* Nuevos estilos para las estadísticas con estrellas y habilidad */
-.stats {
-    margin-bottom: 15px;
-}
-
-.vehiculo-card .stats p {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
-    color: #ccc;
-    margin-left: 0; /* Centrar el texto */
-    padding: 2px 0;
-    display: flex;
-    justify-content: space-between;
-    max-width: 200px;
-    margin: 0 auto;
-}
-
-.vehiculo-card .stats .stars {
-    color: var(--secondary); /* Color amarillo neón para las estrellas */
-    font-size: 1.1em;
-    text-shadow: 0 0 5px var(--secondary);
-    letter-spacing: 1px;
-}
-
-.habilidad {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    color: var(--primary);
-    border: 1px solid rgba(0, 255, 255, 0.5);
-    padding: 10px;
-    border-radius: 5px;
-    margin: 15px auto;
-    max-width: 90%;
-    background: rgba(0, 255, 255, 0.05);
-    margin-bottom: 30px;
-    margin-top: 20px;
-}
-/* Fin de nuevos estilos para las estadísticas con estrellas y habilidad */
-
-
-/* Botones */
-.nav-buttons {
-    display: flex;
-    justify-content: space-between;
-    max-width: 400px;
-    margin: 40px auto 0;
-}
-
-.btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
-    margin-top: 10px;
-}
-
-.btn-select {
-    padding: 10px 20px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.95rem;
-    border: none;
-    border-radius: 25px;
-    background: var(--primary);
-    color: #000;
-    cursor: pointer;
-    box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
-    transition: transform 0.3s, box-shadow 0.3s;
-    margin-left: 0;
-}
-
-.btn-select:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px var(--primary), 0 0 50px var(--primary);
-}
-
-.btn-settings {
-    padding: 8px;
-    font-size: 0;
-    border: none;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-}
-
-.btn-settings:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: rotate(60deg) scale(1.1);
-    box-shadow: 0 0 10px var(--primary);
-}
-
-.btn-settings svg {
-    color: var(--primary);
-    width: 20px;
-    height: 20px;
-    stroke-width: 2;
-}
-
-.btn-nav {
-    text-decoration: none;
-    padding: 12px 24px;
-    border-radius: 30px;
-    font-size: 1rem;
-    font-family: 'Orbitron', sans-serif;
-    color: #000;
-    background: var(--primary);
-    box-shadow: 0 0 15px var(--primary), 0 0 30px var(--primary);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn-nav:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px var(--primary), 0 0 50px var(--primary);
-}
-
-/* Icono de fuego */
-.flame-icon {
-    position: absolute;
-    top: 10px;
-    left: 25px;
-    width: 35px;
-    height: 35px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FF4500"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-2.4-.76-3.8-2.67-4.2-4.13-.5-1.9 0-3.92 1.5-5.4 1.58-1.58 3.5-1.9 5.2-.87 1.7.9 2.5 2.5 2 4.1-.3 1.2-1.3 2.5-2.5 3.1-.9.5-2 .7-3 .2z"/></svg>');
-    background-size: contain;
-    background-repeat: no-repeat;
-    filter: drop-shadow(0 0 5px orange);
-    animation: flamePulse 1s infinite alternate;
-    z-index: 10;
-}
-
-/* Animaciones */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes glowText {
-    from { text-shadow: 0 0 10px var(--primary); }
-    to { text-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary); }
-}
-
-@keyframes fadeInCard {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--primary)); }
-    50% { transform: scale(1.05); filter: drop-shadow(0 0 15px var(--primary)); }
-}
-
-/* Animación para el fondo de cuadrícula */
-@keyframes gridMovement {
-    0% { background-position: 0 0; }
-    100% { background-position: var(--grid-size) var(--grid-size); }
-}
-
-/* ================================
-    Responsividad
-================================ */
-
-/* Tablets (<= 1024px) */
-@media (max-width: 1024px) {
-    h1 { font-size: 2.5rem; }
-    .vehiculo-card h2 { font-size: 1rem; }
-    .vehiculo-card .stats p { font-size: 0.85rem; } /* Ajuste de fuente para stats */
-    .habilidad { font-size: 0.8rem; }
-    .nav-buttons { max-width: 300px; margin: 30px auto 0; }
-}
-
-/* Móviles (<= 768px) */
-@media (max-width: 768px) {
-    h1 { font-size: 2rem;
-    margin-top: -70px; }
-    nav { gap: 20px; padding: 10px 15px; }
-    nav a { font-size: 0.85rem; letter-spacing: 1px; }
-
-    /* Ajuste de botones de navegación principal */
-    .btn-nav { padding: 10px 20px; font-size: 0.9rem; }
-}
-
-/* Portrait */
-@media (orientation: portrait) {
-    body::before {
-        content: "⚠️ Por favor gira tu dispositivo para vista horizontal";
-        position: fixed;
-        top: 0; left: 0;
-        width: 100vw; height: 100vh;
-        background: #0a0a0f;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-size: 1.2rem;
-        z-index: 9999;
-    }
-    main.site, header { display: none; }
-}
-
-/* Teléfonos pequeños (<= 480px) */
-
-@media (max-width: 375px) {
-    h1 { font-size: 1.2rem; }
-}
-</style>
 </html>
