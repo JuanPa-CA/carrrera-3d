@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Legal y Contacto | Neon Rush</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* INICIO: Estilos Globales (Consolidado de todas las páginas) */
+        :root {
+            --primary: #0ff;
+            --secondary: #f0f;
+            --accent: #ff0077;
+            --bg-dark: #0a0a0f;
+            --white: #fff;
+            --muted: #888;
+            --footer-height: 64px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top left, #ff00a8, #440047, #0a0a0f);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: var(--footer-height);
+        }
+
+        /* Fondo con video */
+        .video-card {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .video-card video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        .video-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: brightness(0.7) blur(1px);
+            z-index: 2;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 15, 0.6);
+            padding: 16px 0;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding-top: 10px;
+            transition: color .15s;
+        }
+
+        nav a.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Contenido principal (Modificado para páginas de texto) */
+        main.site {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 140px 20px 80px;
+            min-height: calc(100vh - 160px);
+            text-align: left;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            margin: 0 0 30px;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary), 0 0 25px var(--secondary);
+            animation: glow 2s infinite alternate;
+            text-align: center;
+            padding-top: 50px;
+            /* Espacio para el salto de ancla */
+            margin-top: -50px;
+            /* Compensación para que el título no quede escondido por el header fijo */
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent);
+            margin-top: 40px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed var(--muted);
+            font-size: 1.8rem;
+        }
+
+        p,
+        li {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        /* Estilos específicos para el contenido legal */
+        .content-card {
+            background: rgba(10, 10, 15, 0.8);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 25px rgba(255, 0, 119, 0.15);
+            margin-bottom: 60px;
+            /* Separar las secciones */
+        }
+
+        /* Formulario */
+        .contact-form {
+            display: grid;
+            gap: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            color: var(--white);
+            font-size: 1rem;
+            border-radius: 6px;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .btn.submit {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 15px var(--primary);
+            font-size: 1.1rem;
+            transition: transform .15s, box-shadow .15s;
+            margin-top: 10px;
+            border: none;
+            padding: 12px 22px;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+        }
+
+        .btn.submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        /* Información de Contacto Adicional */
+        .contact-info {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--muted);
+            text-align: center;
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+        }
+
+        .contact-info strong {
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact-info a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color .15s;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: var(--footer-height);
+            background: rgba(10, 10, 15, 0.92);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            z-index: 1000;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            box-shadow: 0 -2px 14px rgba(0, 255, 255, 0.06);
+            backdrop-filter: blur(6px);
+        }
+
+        .footer-left,
+        .footer-center,
+        .footer-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-left p {
+            margin: 0;
+            font-size: 0.92rem;
+            color: var(--muted);
+        }
+
+        .footer-meta {
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-left: 6px;
+        }
+
+        .footer-center .footer-nav {
+            display: flex;
+            gap: 14px;
+        }
+
+        /* Ajuste de navegación del footer para la SPA */
+        .footer-center .footer-nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.86rem;
+            padding: 6px 8px;
+            border-radius: 6px;
+            transition: background .18s, color .18s, transform .12s;
+        }
+
+        .footer-center .footer-nav a:hover {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icons img {
+            width: 28px;
+            height: 28px;
+            display: block;
+            filter: drop-shadow(0 0 3px rgba(0, 255, 255, 0.15));
+            transition: transform .18s, filter .18s;
+        }
+
+        .social-icons a:hover img {
+            transform: scale(1.12);
+            filter: drop-shadow(0 0 8px var(--primary));
+        }
+
+        /* Animación */
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px var(--primary), 0 0 20px var(--secondary);
+            }
+
+            to {
+                text-shadow: 0 0 20px var(--secondary), 0 0 40px var(--accent);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width:768px) {
+            footer {
+                display: none;
+            }
+
+            body {
+                padding-bottom: 0;
+            }
+
+            h1 {
+                font-size: 2.4rem;
+            }
+
+            nav {
+                gap: 30px;
+            }
+
+            main.site {
+                padding-top: 100px;
+            }
+
+            h1 {
+                padding-top: 30px;
+                margin-top: -30px;
+            }
+        }
+
+        /* Orientación móvil */
+        @media (orientation:portrait) and (max-width:768px) {
+
+            main.site,
+            header,
+            footer {
+                display: none;
+            }
+
+            body::before {
+                content: "⚠️ Por favor, gira tu dispositivo para una mejor experiencia (vista horizontal)";
+                position: fixed;
+                inset: 0;
+                background: var(--bg-dark);
+                color: var(--primary);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                font-size: 1.2rem;
+                padding: 20px;
+                z-index: 9999;
+                font-family: 'Orbitron', sans-serif;
+                text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+            }
+        }
+
+        /* FIN: Estilos Globales */
+    </style>
+</head>
+
+<body>
+
+    <div class="video-card" aria-hidden="true">
+        <video autoplay muted loop playsinline>
+            <source src="./vid/video.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <header>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="vehiculos.html">Vehículos</a>
+            <a href="circuitos.html">Circuitos</a>
+        </nav>
+    </header>
+
+    <main class="site">
+
+        <h1 id="terminos">TÉRMINOS Y CONDICIONES</h1>
+        <div class="content-card">
+            <p><strong>Última Actualización: 25 de Octubre de 2025</strong></p>
+
+            <p>Bienvenido a **NEON RUSH**. Al acceder o utilizar nuestro juego, aceptas los siguientes términos de
+                servicio. Por favor, léelos detenidamente. Si no estás de acuerdo con alguna parte de estos términos, no
+                utilices el servicio.</p>
+
+            <h2>1. Aceptación de los Términos</h2>
+            <p>Al utilizar **NEON RUSH**, confirmas que tienes la capacidad legal para aceptar estos Términos, que
+                tienes al menos 13 años de edad y que has leído, entendido y aceptado esta versión de los Términos en su
+                totalidad. [..contenido legal de relleno...]</p>
+
+            <h2>2. Licencia Limitada</h2>
+            <p>**NEON RUSH** te concede una licencia personal, limitada, no exclusiva, no transferible y revocable para
+                utilizar el Juego únicamente para tu uso personal y no comercial. [..contenido legal de relleno...]</p>
+
+            <h2>3. Propiedad Intelectual</h2>
+            <p>Todo el contenido del Juego (incluidos gráficos, interfaz, código, música y efectos de sonido) es
+                propiedad de Neon Rush y sus licenciantes y está protegido por derechos de autor, marcas registradas y
+                otras leyes. [..contenido legal de relleno...]</p>
+        </div>
+
+        <h1 id="privacidad">POLÍTICA DE PRIVACIDAD</h1>
+        <div class="content-card">
+            <p><strong>Vigente desde: 25 de Octubre de 2025</strong></p>
+
+            <p>En **NEON RUSH**, valoramos tu privacidad. Esta política describe qué información recopilamos, cómo la
+                usamos y las medidas que tomamos para protegerla. [..introducción de privacidad..]</p>
+
+            <h2>1. Información que Recopilamos</h2>
+            <p>Recopilamos dos tipos de información: la que nos proporcionas directamente y la que se genera
+                automáticamente al usar el Juego.</p>
+
+            <h3>1.1. Información Directa</h3>
+            <ul>
+                <li>**Datos de Cuenta:** Nombre de usuario y dirección de correo electrónico.</li>
+                <li>**Comunicaciones:** Información que proporcionas al contactar a soporte.</li>
+            </ul>
+
+            <h3>1.2. Información Automática</h3>
+            <ul>
+                <li>**Datos de Juego:** Progreso, puntuaciones, tiempo de juego, compras dentro del juego.</li>
+                <li>**Datos Técnicos:** Dirección IP, tipo de dispositivo y errores/crash logs.</li>
+            </ul>
+
+            <h2>2. Cómo Usamos tu Información</h2>
+            <p>Utilizamos la información recopilada para: Proporcionar, operar y mantener el Juego; Mejorar,
+                personalizar y expandir nuestros servicios; Procesar tus transacciones; y proporcionar soporte al
+                usuario. [..contenido de privacidad de relleno..]</p>
+        </div>
+
+        <h1 id="contacto">CONTÁCTANOS</h1>
+        <p style="text-align:center; max-width:100%; margin:0 auto 20px;">¿Tienes alguna pregunta, sugerencia o problema
+            técnico? Envíanos un mensaje y te responderemos tan pronto como sea posible. 👾</p>
+
+        <div class="content-card">
+            <form action="tu_servidor_de_envio_de_email" method="POST" class="contact-form">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="asunto">Asunto</label>
+                    <input type="text" id="asunto" name="asunto" required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" required></textarea>
+                </div>
+                <button type="submit" class="btn submit">Enviar Mensaje</button>
+            </form>
+
+            <div class="contact-info">
+                <h2>Otras Vías de Contacto</h2>
+                <p><strong>Soporte Técnico</strong></p>
+                <p><a href="mailto:support@neonrush.com">support@neonrush.com</a></p>
+                <p><strong>Consultas de Prensa</strong></p>
+                <p><a href="mailto:press@neonrush.com">press@neonrush.com</a></p>
+            </div>
+        </div>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="footer-left">
+            <p>© 2025 Neon Rush</p><span class="footer-meta">v1.0</span>
+        </div>
+        <div class="footer-center">
+            <nav class="footer-nav">
+                <a href="legal.html#terminos">Términos</a>
+                <a href="legal.html#privacidad">Privacidad</a>
+                <a href="legal.html#contacto">Contacto</a>
+            </nav>
+        </div>
+        <div class="footer-right">
+            <div class="social-icons">
+                <a href="https://discord.com" target="_blank" aria-label="Discord">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtAEfSw-2sMgXfXJxVQ0AATc2QJ6TBd1nRnA&s"
+                        alt="Discord">
+                </a>
+                <a href="https://twitter.com" target="_blank" aria-label="X">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfxRWfQXLI0gkv7sdl2y5vRwPUIvlZOAgCcA&s"
+                        alt="X">
+                </a>
+                <a href="https://reddit.com" target="_blank" aria-label="Reddit">
+                    <img src="./img/reddit.png" alt="Reddit">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
