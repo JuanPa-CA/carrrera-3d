@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Neon Rush - Inicio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --primary: #0ff;
@@ -64,7 +69,8 @@
 
     .logo {
       font-family: 'Orbitron', sans-serif;
-      font-size: clamp(2.5rem, 8vw, 6rem); /* Título responsivo */
+      font-size: clamp(2.5rem, 8vw, 6rem);
+      /* Título responsivo */
       margin: 0 0 10px 0;
       letter-spacing: 5px;
       color: var(--primary);
@@ -81,6 +87,7 @@
       margin-bottom: 40px;
     }
 
+    /* ESTILOS DEL BOTÓN CON EFECTO DE ESCÁNER */
     .btn-inicio {
       padding: 15px 40px;
       font-size: 1.2rem;
@@ -92,6 +99,29 @@
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 0 10px var(--primary);
+      /* Propiedades CLAVE para el efecto de escáner */
+      position: relative;
+      overflow: hidden;
+      /* Oculta el escáner al inicio y al final */
+    }
+
+    /* El efecto de luz de escáner */
+    .btn-inicio::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -75%;
+      /* Inicia fuera del botón */
+      width: 50%;
+      /* Ancho de la luz de escáner */
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      /* Color semi-transparente */
+      transform: skewX(-20deg);
+      /* Crea el efecto de inclinación */
+      z-index: 1;
+      /* Asegura que la luz esté sobre el fondo del botón */
+      animation: scanLight 3s infinite linear;
     }
 
     .btn-inicio:hover {
@@ -99,19 +129,47 @@
       background: var(--white);
       box-shadow: 0 0 20px var(--white), 0 0 40px var(--white);
     }
-    
+
     /* Animaciones */
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes glowText {
-      from { text-shadow: 0 0 10px var(--primary); }
-      to { text-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary); }
+      from {
+        text-shadow: 0 0 10px var(--primary);
+      }
+
+      to {
+        text-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary);
+      }
     }
 
-    /* ===== Responsividad ===== */
+    /* Animación para mover la luz del escáner */
+    @keyframes scanLight {
+      0% {
+        left: -75%;
+      }
+
+      50% {
+        left: 150%;
+      }
+
+      /* Atraviesa el botón y termina fuera */
+      100% {
+        left: -75%;
+      }
+
+      /* Vuelve a empezar */
+    }
+
+    /* ===== Responsividad y Modo Horizontal ===== */
     @media (max-width: 768px) {
       .btn-inicio {
         padding: 12px 25px;
@@ -124,15 +182,16 @@
         padding: 10px 20px;
         font-size: 0.95rem;
       }
+
       .logo {
         letter-spacing: 3px;
       }
+
       .slogan {
         letter-spacing: 1px;
       }
     }
 
-    /* ===== Forzar modo horizontal ===== */
     @media (orientation: portrait) {
       body::before {
         content: "⚠️ Por favor gira tu dispositivo para vista horizontal";
@@ -159,10 +218,13 @@
     }
   </style>
 </head>
+
 <body>
   <div class="video">
     <video id="trailer-video" autoplay muted loop playsinline>
+
       <source src="./vid/video.mp4" type="video/mp4">
+
     </video>
     <div class="overlay"></div>
   </div>
@@ -173,4 +235,5 @@
     <a href="index.html" class="btn-inicio">UNIRSE A LA PARTIDA</a>
   </main>
 </body>
+
 </html>
