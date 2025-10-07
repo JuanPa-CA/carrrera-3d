@@ -122,6 +122,7 @@
             /* TAMAÑO ACTUAL: 750px */
             flex: 0 0 750px; 
             width: 750px; 
+            height: 400px;
             padding: 30px; 
             margin: 0; 
             background: rgba(255, 255, 255, 0.05);
@@ -167,12 +168,13 @@
 
         /* Contenido de la tarjeta */
         .circuito-card img {
-            width: 40%; 
+            width: 45%; 
             max-height: 320px; 
             object-fit: cover; 
             border-radius: 5px;
             margin: 0; 
             animation: pulse 5s infinite;
+            padding-top: 50px;
         }
 
         /* Contenedor para la información de la columna derecha */
@@ -191,10 +193,12 @@
             margin-top: 0; 
             text-align: left;
             width: 100%; /* Asegura que ocupe todo el espacio superior */
+            padding-bottom: 60px;
+            padding-top: 20px;
         }
 
         .circuito-card p {
-            font-size: 1.2rem; 
+            font-size: 1.1rem; 
             color: #ccc;
             margin-bottom: 20px; 
             height: auto; 
@@ -203,6 +207,7 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6; 
             width: 100%; /* Asegura que ocupe todo el espacio central */
+            padding-bottom: 20%;
         }
         
         /* NUEVO: Contenedor para alinear dificultad a la izquierda y botón a la derecha */
@@ -222,7 +227,7 @@
             font-weight: bold;
             font-size: 1.1rem; 
             font-family: 'Orbitron', sans-serif;
-            margin: 0; /* Eliminamos el margin-bottom anterior */
+            margin: 0; 
             text-shadow: 0 0 5px currentColor;
         }
 
@@ -296,24 +301,6 @@
         .slider-radio {
             display: none;
         }
-
-                .locked-select {
-            background: #333;
-            color: var(--muted);
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-            pointer-events: auto;
-            font-size: 0.95rem;
-            letter-spacing: 2px;
-            padding: 10px 10px 10px 10px;
-            border-radius: 6px;
-            margin-right: 40px;
-        }
-
-        .locked-select:hover {
-            transform: none;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
-        }
         
         /* Icono de fuego (Para pistas desafiantes) */
         .flame-icon {
@@ -347,9 +334,8 @@
             cursor: pointer;
             box-shadow: 0 0 10px var(--primary-neon);
             transition: transform 0.3s, box-shadow 0.3s;
-             margin-right: 40px;
-            width: auto;
-            
+            width: auto; /* Permitir que el botón se ajuste al contenido */
+            margin-right: 20px;
         }
 
         .btn-select:hover {
@@ -378,7 +364,7 @@
 
         .btn {
             padding: 18px 40px; 
-            font-size: 1rem; 
+            font-size: 1.4rem; 
             border-radius: 30px;
             font-family: 'Orbitron', sans-serif;
             text-decoration: none;
@@ -534,8 +520,7 @@
                             <p>Pistas flotantes en gravedad cero con cambios de plano. Requiere extrema precisión en los giros y derrapes.</p>
                             <div class="card-actions-wrapper">
                                 <span class="difficulty">Alta</span>
-                                <button class="locked-select"
-                                onclick="alert('¡Circuito Bloqueado! Desbloquea los demás circuitos para seleccionarlo.')">BLOQUEADO</button>
+                                <button class="btn-select" disabled>BLOQUEADO</button>
                             </div>
                         </div>
                     </div>
@@ -573,4 +558,3 @@
     </main>
 </body>
 </html>
-
