@@ -6,9 +6,6 @@
     <title>Circuitos - Neon Rush</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* ================================
-            VARIABLES CSS
-        ================================ */
         :root {
             --primary-neon: #f0f; /* Magenta Neón */
             --secondary-neon: #0ff; /* Cian Neón */
@@ -19,9 +16,6 @@
             --bg-dark: #1b0034; /* Violeta Oscuro */
         }
 
-        /* ================================
-            FONDO Y ESTRUCTURA
-        ================================ */
         body {
             font-family: 'Orbitron', sans-serif;
             color: #fff;
@@ -29,14 +23,10 @@
             padding: 0;
             animation: fadeIn 1s ease-in;
             overflow-x: hidden;
-            
-            /* FONDO: Degradado radial violeta/negro */
             background-color: #0d0d0d;
             background-image: 
-                /* Capa 1: Puntos/Estrellas (Blanco/Cian Neón) */
                 radial-gradient(var(--secondary-neon) 1px, transparent 0),
-                radial-gradient(rgba(240, 0, 240, 0.4) 1px, transparent 0), /* Magenta neón sutil */
-                /* Capa 2: Degradado base */
+                radial-gradient(rgba(240, 0, 240, 0.4) 1px, transparent 0), 
                 radial-gradient(circle at top, #0d0d0d, var(--bg-dark));
                 
             background-size: 80px 80px, 120px 120px, cover;
@@ -197,16 +187,15 @@
             padding-top: 20px;
         }
 
-        .circuito-card p {
-            font-size: 1.1rem; 
+      .circuito-card p {
+            font-size: 0.9rem; 
             color: #ccc;
             margin-bottom: 20px; 
             height: auto; 
             display: block;
             text-align: left;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6; 
-            width: 100%; /* Asegura que ocupe todo el espacio central */
+            line-height: 1.9; 
+            width: 100%;
             padding-bottom: 20%;
         }
         
@@ -558,4 +547,5 @@
     </main>
 </body>
 </html>
+
 
