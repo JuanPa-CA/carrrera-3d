@@ -10,18 +10,13 @@
         rel="stylesheet">
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
-        /* ================================
-Vehículos - Estilo Futurista Animado
-================================ */
         :root {
             --primary: #0ff;
             --secondary: #ff0;
             --bg-dark: #0a0a0f;
             --muted: #bbb;
             --white: #fff;
-            /* Nueva variable para el color activo del slider */
             --primary-neon: #ff0;
-            /* Variables para el fondo de cuadrícula */
             --grid-color: rgba(0, 255, 255, 0.1);
             --grid-size: 50px;
             --grid-animation-speed: 60s;
@@ -29,24 +24,19 @@ Vehículos - Estilo Futurista Animado
 
         body {
             font-family: 'Orbitron', sans-serif;
-            /* Fondo original, ahora con el fondo de cuadrícula neón */
             background: var(--bg-dark);
             color: var(--white);
             margin: 0;
             padding: 0;
             animation: fadeIn 1s ease-in;
-
-            /* ESTILOS DE FONDO DE CUADRÍCULA NEÓN */
             background-image:
                 linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
                 linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px),
                 linear-gradient(135deg, rgba(0, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 255, 255, 0.1) 50%, rgba(0, 255, 255, 0.1) 75%, transparent 75%, transparent);
             background-size: var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size);
-            /* Animación de desplazamiento */
             animation: gridMovement var(--grid-animation-speed) linear infinite, fadeIn 1s ease-in;
         }
 
-        /* Header fijo */
         header {
             position: fixed;
             top: 0;
@@ -86,16 +76,13 @@ Vehículos - Estilo Futurista Animado
             text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
         }
 
-        /* Contenido principal */
         main.site {
             padding: 180px 20px 40px;
-            /* margen para header */
             max-width: 1200px;
             margin: auto;
             animation: slideUp 1s ease-out;
         }
 
-        /* Título */
         h1 {
             text-align: center;
             font-size: 3.5rem;
@@ -106,13 +93,9 @@ Vehículos - Estilo Futurista Animado
             margin-top: -95px;
         }
 
-        /* =========================================================
-ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
-========================================================= */
 
         .slider-wrapper {
             position: relative;
-            /* Aumentamos el ancho para acomodar el diseño de dos columnas (ej. 700px) */
             width: 700px;
             height: auto;
             margin: 40px auto;
@@ -123,11 +106,9 @@ ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
         }
 
         .vehiculos-container {
-            /* Ancho total: 6 tarjetas * (700px ancho + 45px gap) = 4470px, usando el desplazamiento como referencia*/
             display: flex;
             width: 4470px;
             padding: 0;
-            /* Ajuste el gap */
             gap: 45px;
             transition: transform 0.5s ease-in-out;
             grid-template-columns: none !important;
@@ -191,7 +172,6 @@ ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
         }
 
 
-        /* Slider nav */
         .slider-nav {
             position: relative;
             text-align: center;
@@ -234,18 +214,14 @@ ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
             display: none;
         }
 
-        /* Vehículo contenido */
         .vehiculo-card model-viewer {
-            /* Ocupa la mitad izquierda */
             width: 50%;
             max-width: 350px;
             height: 350px;
-            /* Aumentar la altura para el modelo 3D */
             margin: 0;
             display: block;
             animation: pulse 10s infinite;
             padding-right: 0;
-            /* Eliminar padding innecesario */
         }
 
         .vehiculo-card h2 {
@@ -274,7 +250,6 @@ ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
 
         .vehiculo-card .stats .stars {
             color: var(--secondary);
-            /* Color amarillo neón para las estrellas */
             font-size: 1.1em;
             text-shadow: 0 0 5px var(--secondary);
             letter-spacing: 1px;
@@ -292,7 +267,6 @@ ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
             background: rgba(0, 255, 255, 0.05);
         }
 
-        /* Fin de nuevos estilos para las estadísticas con estrellas y habilidad */
         .locked-select {
             background: #333;
             color: var(--muted);
@@ -311,7 +285,6 @@ ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
             box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
         }
 
-        /* Botones */
         .nav-buttons {
             display: flex;
             justify-content: space-between;
@@ -406,7 +379,46 @@ ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
             z-index: 10;
         }
 
-        /* Animaciones */
+
+
+
+.flame-icon::before {
+    content: "HOT";
+    position: absolute;
+    top: -10px; 
+    left: 45px;
+    padding: 2px 6px;
+    background-color: #ff4500;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0; 
+    pointer-events: none;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    transform: translateX(-5px); 
+}
+
+.flame-icon:hover {
+    transform: rotate(90deg); 
+    filter: drop-shadow(0 0 8px red); 
+}
+
+.flame-icon:hover::before {
+    opacity: 1; 
+    transform: translateX(0);
+}
+
+@keyframes flamePulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -502,7 +514,7 @@ ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
             <div class="vehiculos-container">
 
                 <div class="vehiculo-card">
-                    <model-viewer src="XR7+Streak.glb" alt="Vehículo XR-7 Streak" auto-rotate camera-controls
+                    <model-viewer src="./model/XR7+Streak.glb" alt="Vehículo XR-7 Streak" auto-rotate camera-controls
                         style="width: 50%; height: 350px;">
                     </model-viewer>
                     <div class="vehiculo-info">
@@ -703,5 +715,3 @@ ESTILOS CLAVE DEL SLIDER (Un solo elemento visible)
 </body>
 
 </html>
-
-
