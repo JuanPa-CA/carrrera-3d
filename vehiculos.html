@@ -147,6 +147,7 @@
             box-shadow: 0 0 20px rgba(0, 183, 255, 0.3);
         }
 
+ 
         #slide1:checked~.vehiculos-container {
             transform: translateX(calc(0px - 20px));
         }
@@ -170,7 +171,6 @@
         #slide6:checked~.vehiculos-container {
             transform: translateX(calc(0px - 3925px - 20px));
         }
-
 
         .slider-nav {
             position: relative;
@@ -255,18 +255,6 @@
             letter-spacing: 1px;
         }
 
-        .habilidad {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            color: var(--primary);
-            border: 1px solid rgba(0, 255, 255, 0.5);
-            padding: 10px;
-            border-radius: 5px;
-            margin: 15px 0 30px 0;
-            max-width: 90%;
-            background: rgba(0, 255, 255, 0.05);
-        }
-
         .locked-select {
             background: #333;
             color: var(--muted);
@@ -275,9 +263,8 @@
             pointer-events: auto;
             font-size: 0.95rem;
             letter-spacing: 2px;
-            padding: 10px 10px 10px 10px;
-            border-radius: 6px;
-            margin-left: 95px;
+            padding: 10px 20px;
+            border-radius: 15px;
         }
 
         .locked-select:hover {
@@ -296,7 +283,7 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            gap: 20px;
+            gap: 15px; 
             margin-top: 10px;
         }
 
@@ -311,7 +298,7 @@
             cursor: pointer;
             box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
             transition: transform 0.3s, box-shadow 0.3s;
-            margin-left: 95px;
+            margin-left: 50px;
         }
 
         .btn-select:hover {
@@ -326,19 +313,15 @@
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
             cursor: pointer;
-            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s, filter 0.3s;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 40px;
             height: 40px;
+            position: relative; 
         }
-
-        .btn-settings:hover {
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 10px var(--primary);
-        }
-
+        
         .btn-settings svg {
             color: var(--primary);
             width: 20px;
@@ -349,19 +332,20 @@
         .btn-settings::before {
             content: "Ajustes";
             position: absolute;
-            top: 10px;
-            left: 55px;
-            padding: 2px 6px;
+            top: -35px; 
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px 10px;
             background-color: #ff4500;
             color: white;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: bold;
-            border-radius: 4px;
+            border-radius: 6px;
             white-space: nowrap;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-            transform: translateX(-5px);
+            transition: opacity 0.3s ease-out;
+            z-index: 10;
         }
 
         .btn-settings:hover {
@@ -369,11 +353,64 @@
             filter: drop-shadow(0 0 8px rgb(12, 83, 189));
         }
 
-        .btn-settings:hover:hover::before {
+        .btn-settings:hover::before {
             opacity: 1;
-            transform: translateX(0);
+        }
+        
+        .btn-ability {
+            padding: 8px;
+            font-size: 0;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 255, 0, 0.1); 
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            position: relative; 
         }
 
+        .btn-ability svg {
+            color: #0f0;
+            width: 20px;
+            height: 20px;
+            stroke-width: 2;
+            filter: drop-shadow(0 0 5px #0f0);
+        }
+
+        .btn-ability:hover {
+            transform: scale(1.1);
+            background: rgba(0, 255, 0, 0.2);
+            box-shadow: 0 0 15px #0f0;
+        }
+
+        .btn-ability::before {
+            content: attr(data-ability);
+            position: absolute;
+            top: -35px; 
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px 10px;
+            background-color: #0f0; 
+            color: #000;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 6px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-out;
+            box-shadow: 0 0 10px #0f0;
+            z-index: 10;
+        }
+
+        .btn-ability:hover::before {
+            opacity: 1;
+        }
 
         .btn-nav {
             text-decoration: none;
@@ -407,8 +444,6 @@
         }
 
 
-
-
         .flame-icon::before {
             content: "HOT";
             position: absolute;
@@ -438,6 +473,7 @@
         }
 
         @keyframes flamePulse {
+
             from {
                 transform: scale(1);
             }
@@ -470,6 +506,7 @@
         }
 
         @keyframes glowText {
+
             from {
                 text-shadow: 0 0 10px var(--primary);
             }
@@ -552,8 +589,14 @@
                             <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
                             <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
                         </div>
-                        <p class="habilidad">Habilidad: Rayo Turbo - Otorga una ráfaga de velocidad instantánea. </p>
                         <div class="btn-container">
+                            <button class="btn-ability" data-ability="Rayo Turbo: Otorga una ráfaga de velocidad instantánea.">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-zap">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                            </button>
                             <button class="btn-settings" onclick="alert('Ajustes del XR-7 Streak')">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -581,8 +624,14 @@
                             <p>Aceleración: <span class="stars">⭐⭐⭐⭐⭐</span></p>
                             <p>Manejo: <span class="stars">⭐⭐⭐</span></p>
                         </div>
-                        <p class="habilidad">Habilidad: Salto Aéreo - Permite saltar obstáculos temporalmente. </p>
                         <div class="btn-container">
+                            <button class="btn-ability" data-ability="Salto Aéreo: Permite saltar obstáculos temporalmente.">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-zap">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                            </button>
                             <button class="btn-settings" onclick="alert('Ajustes del Aero-Viper')">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -609,9 +658,14 @@
                             <p>Aceleración: <span class="stars">⭐⭐⭐</span></p>
                             <p>Manejo: <span class="stars">⭐⭐⭐⭐⭐</span></p>
                         </div>
-                        <p class="habilidad">Habilidad: Derrape Ilimitado - Llena el turbo un 50% más rápido al
-                            derrapar. </p>
                         <div class="btn-container">
+                            <button class="btn-ability" data-ability="Derrape Ilimitado: Llena el turbo un 50% más rápido al derrapar.">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-zap">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                            </button>
                             <button class="btn-settings" onclick="alert('Ajustes del Neon Drift')">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -639,9 +693,14 @@
                             <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
                             <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
                         </div>
-                        <p class="habilidad">Habilidad: Campo de Energía - Crea un escudo temporal que anula un impacto.
-                        </p>
                         <div class="btn-container">
+                            <button class="btn-ability" data-ability="Campo de Energía: Crea un escudo temporal que anula un impacto.">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-zap">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                            </button>
                             <button class="btn-settings" onclick="alert('Ajustes del Thunderbolt X')">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -670,9 +729,14 @@
                             <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
                             <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
                         </div>
-                        <p class="habilidad">Habilidad: Invisibilidad - Se vuelve intangible para pasar a través de
-                            oponentes y trampas. </p>
                         <div class="btn-container">
+                            <button class="btn-ability" data-ability="Invisibilidad: Se vuelve intangible para pasar a través de oponentes y trampas.">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-zap">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                            </button>
                             <button class="btn-settings" onclick="alert('Ajustes del Cyber Phantom')">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -701,9 +765,14 @@
                             <p>Aceleración: <span class="stars">⭐⭐⭐⭐</span></p>
                             <p>Manejo: <span class="stars">⭐⭐⭐⭐</span></p>
                         </div>
-                        <p class="habilidad">Habilidad: Rastro Solar - Deja una estela de luz que ralentiza a los
-                            oponentes. </p>
                         <div class="btn-container">
+                            <button class="btn-ability" data-ability="Rastro Solar: Deja una estela de luz que ralentiza a los oponentes.">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-zap">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                            </button>
                             <button class="btn-settings" onclick="alert('Ajustes del Solar Blade')">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -714,18 +783,14 @@
                                     </path>
                                 </svg>
                             </button>
-                            <button class="locked-select"
-                                onclick="alert('¡Vehículo Bloqueado! Desbloquea los demás vehiculos para seleccionarlo.')">BLOQUEADO</button>
+                            <button class="btn-select"
+                                onclick="alert('Solar Blade Seleccionado')">Seleccionar</button>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
         </div>
-        </div>
-            
         <div class="slider-nav">
             <label for="slide1" title="XR-7 Streak"></label>
             <label for="slide2" title="Aero-Viper"></label>
@@ -741,5 +806,4 @@
         </div>
     </main>
 </body>
-
 </html>
