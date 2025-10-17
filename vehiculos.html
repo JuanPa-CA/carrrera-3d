@@ -336,7 +336,6 @@
 
         .btn-settings:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: rotate(60deg) scale(1.1);
             box-shadow: 0 0 10px var(--primary);
         }
 
@@ -346,6 +345,35 @@
             height: 20px;
             stroke-width: 2;
         }
+
+        .btn-settings::before {
+            content: "Ajustes";
+            position: absolute;
+            top: 10px;
+            left: 55px;
+            padding: 2px 6px;
+            background-color: #ff4500;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+            transform: translateX(-5px);
+        }
+
+        .btn-settings:hover {
+            transform: rotate(360deg);
+            filter: drop-shadow(0 0 8px rgb(12, 83, 189));
+        }
+
+        .btn-settings:hover:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
 
         .btn-nav {
             text-decoration: none;
@@ -381,42 +409,43 @@
 
 
 
-.flame-icon::before {
-    content: "HOT";
-    position: absolute;
-    top: 10px; 
-    left: 55px;
-    padding: 2px 6px;
-    background-color: #ff4500;
-    color: white;
-    font-size: 10px;
-    font-weight: bold;
-    border-radius: 4px;
-    white-space: nowrap;
-    opacity: 0; 
-    pointer-events: none;
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-    transform: translateX(-5px); 
-}
+        .flame-icon::before {
+            content: "HOT";
+            position: absolute;
+            top: 10px;
+            left: 55px;
+            padding: 2px 6px;
+            background-color: #ff4500;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+            transform: translateX(-5px);
+        }
 
-.flame-icon:hover {
-    transform: rotate(90deg); 
-    filter: drop-shadow(0 0 8px red); 
-}
+        .flame-icon:hover {
+            transform: rotate(90deg);
+            filter: drop-shadow(0 0 8px red);
+        }
 
-.flame-icon:hover::before {
-    opacity: 1; 
-    transform: translateX(0);
-}
+        .flame-icon:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
-@keyframes flamePulse {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.05);
-    }
-}
+        @keyframes flamePulse {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.05);
+            }
+        }
 
         @keyframes fadeIn {
             from {
@@ -685,16 +714,16 @@
                                     </path>
                                 </svg>
                             </button>
-                             <button class="locked-select"
+                            <button class="locked-select"
                                 onclick="alert('¡Vehículo Bloqueado! Desbloquea los demás vehiculos para seleccionarlo.')">BLOQUEADO</button>
                         </div>
                     </div>
                 </div>
 
-                
-                    </div>
-                </div>
+
             </div>
+        </div>
+        </div>
         </div>
             
         <div class="slider-nav">
@@ -714,5 +743,3 @@
 </body>
 
 </html>
-
-
